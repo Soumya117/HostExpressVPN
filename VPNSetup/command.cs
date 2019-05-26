@@ -22,8 +22,7 @@ namespace VPNSetup
 
     public string createHostedNetwork(string hostname, string password)
     {
-      var create_cmd = "netsh wlan set hostednetwork mode=allow ssid=" +
-                        hostname + "key=" + password;
+      var create_cmd = "NETSH WLAN set hostednetwork mode = allow ssid = "+ hostname + " key = " + password;
       return create_cmd;
     }
 

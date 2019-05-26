@@ -4,15 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Windows.Forms;
 using System.Windows;
 
 namespace VPNSetup
 {
+
+  public struct Output
+  {
+    public string output;
+    public string error;
+  }
+
   public class ProcessCmd
   {
     Process process;
+    public Output result; 
 
-    public ProcessCmd(string arguments, DataReceivedEventHandler cmd_DataReceived)
+    public ProcessCmd(string arguments)
     {
       process = new Process();
       ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -25,8 +34,6 @@ namespace VPNSetup
       startInfo.CreateNoWindow = true;
       startInfo.Verb = "runas";
       process.StartInfo = startInfo;
-      process.ErrorDataReceived += cmd_Error;
-      process.OutputDataReceived += cmd_DataReceived;
     }
 
     public Process getProcess()
@@ -34,16 +41,17 @@ namespace VPNSetup
       return process;
     }
 
-    public void start()
+    public Output getOutput()
+    {
+      return result;
+    }
+    public Output start()
     {
       process.Start();
-      process.BeginErrorReadLine();
-      process.BeginOutputReadLine();
-    }
-
-    static void cmd_Error(object sender, DataReceivedEventArgs e)
-    {
-      Console.WriteLine(e.Data);
+      result.output = process.StandardOutput.ReadToEnd();
+      result.error = process.StandardError.ReadToEnd();
+      process.WaitForExit();
+      return result;
     }
   }
 }
