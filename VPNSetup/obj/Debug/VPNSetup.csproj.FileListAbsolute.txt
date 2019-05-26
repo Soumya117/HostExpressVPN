@@ -11,3 +11,13 @@ Z:\GIT\VPNSetup\VPNSetup\VPNSetup\obj\Debug\VPNSetup.createNetwork.resources
 Z:\VPNSetup\VPNSetup\bin\Debug\VPNSetup.exe.config
 Z:\VPNSetup\VPNSetup\obj\Debug\VPNSetup.exe
 Z:\VPNSetup\VPNSetup\obj\Debug\VPNSetup.pdb
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\bin\Debug\VPNSetup.exe.config
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.exe
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.pdb
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\bin\Debug\VPNSetup.exe
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\bin\Debug\VPNSetup.pdb
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.csprojResolveAssemblyReference.cache
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.createNetwork.resources
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.Form1.resources
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.Properties.Resources.resources
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.csproj.GenerateResource.Cache

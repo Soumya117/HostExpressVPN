@@ -12,7 +12,7 @@ namespace VPNSetup
   {
     Process process;
 
-    public ProcessCmd(string arguments)
+    public ProcessCmd(string arguments, DataReceivedEventHandler cmd_DataReceived)
     {
       process = new Process();
       ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -23,11 +23,15 @@ namespace VPNSetup
       startInfo.RedirectStandardOutput = true;
       startInfo.UseShellExecute = false;
       startInfo.CreateNoWindow = true;
-      Console.WriteLine("Arguments: " + startInfo.Arguments);
       startInfo.Verb = "runas";
       process.StartInfo = startInfo;
       process.ErrorDataReceived += cmd_Error;
       process.OutputDataReceived += cmd_DataReceived;
+    }
+
+    public Process getProcess()
+    {
+      return process;
     }
 
     public void start()
@@ -35,11 +39,6 @@ namespace VPNSetup
       process.Start();
       process.BeginErrorReadLine();
       process.BeginOutputReadLine();
-    }
-
-    static void cmd_DataReceived(object sender, DataReceivedEventArgs e)
-    {
-      Console.WriteLine(e.Data);
     }
 
     static void cmd_Error(object sender, DataReceivedEventArgs e)

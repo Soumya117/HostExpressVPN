@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace VPNSetup
 {
@@ -19,10 +20,15 @@ namespace VPNSetup
       InitializeComponent();
     }
 
+    static void create_hostedNetwork(object sender, DataReceivedEventArgs e)
+    {
+      Console.WriteLine("Creating...");
+    }
+
     private void button1_Click(object sender, EventArgs e)
     {
       var create_cmd = cmd.createHostedNetwork(textBox1.Text, textBox2.Text);
-      processCmd = new ProcessCmd(create_cmd);
+      processCmd = new ProcessCmd(create_cmd, create_hostedNetwork);
       processCmd.start();
     }
   }
