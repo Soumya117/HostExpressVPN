@@ -36,22 +36,20 @@ namespace VPNSetup
       process.StartInfo = startInfo;
     }
 
-    public Process getProcess()
-    {
-      return process;
-    }
-
     public Output getOutput()
     {
       return result;
     }
-    public Output start()
+
+    public void start()
     {
       process.Start();
-      result.output = process.StandardOutput.ReadToEnd();
+      var output = process.StandardOutput.ReadToEnd();
+      output.Trim().Replace("\r", string.Empty);
+      output.Trim().Replace("\n", string.Empty);
+      result.output = output;
       result.error = process.StandardError.ReadToEnd();
       process.WaitForExit();
-      return result;
     }
   }
 }

@@ -24,22 +24,14 @@ namespace VPNSetup
           this.Hide();
         }
       }
-      //TODO : change this to do something else
-      //if(!String.IsNullOrEmpty(result.error))
-      //{
-      //  var message = MessageBox.Show(result.output, "Status", MessageBoxButtons.OK);
-      //  if (message == DialogResult.OK)
-      //  {
-      //    this.Hide();
-      //  }
-      //}
     }
 
     private void button1_Click(object sender, EventArgs e)
     {
       var create_cmd = cmd.createHostedNetwork(textBox1.Text, textBox2.Text);
       processCmd = new ProcessCmd(create_cmd);
-      var create_output = processCmd.start();
+      processCmd.start();
+      var create_output = processCmd.getOutput();
       create_hostedNetwork(create_output);
     }
   }

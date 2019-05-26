@@ -26,10 +26,16 @@ namespace VPNSetup
       return create_cmd;
     }
 
-    public string startHostedNetwork(string hostname)
+    public string startHostedNetwork()
     {
       var start_cmd = "netsh wlan start hostedNetwork";
       return start_cmd;
+    }
+
+    public string showPassword()
+    {
+      var show_pwd = "netsh wlan show hostedNetwork security";
+      return show_pwd;
     }
   }
 }
