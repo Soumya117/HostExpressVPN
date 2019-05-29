@@ -80,8 +80,8 @@ namespace VPNSetup
       var view_output = processCmd.getOutput();
       extract_hostedNetwork(view_output);
       var connect_output = start_hostedNertwork();
+      NetworkAdapters.enable();
       display_hostedNetwork(connect_output);
-
     }
 
     private void button3_Click(object sender, EventArgs e)
@@ -90,6 +90,7 @@ namespace VPNSetup
       processCmd = new ProcessCmd(stop_cmd);
       processCmd.start();
       var stop_output = processCmd.getOutput();
+      NetworkAdapters.disable();
       stop_hostedNetwork(stop_output);
     }
 
