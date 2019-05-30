@@ -42,13 +42,11 @@
       this.label2 = new System.Windows.Forms.Label();
       this.status_label = new System.Windows.Forms.Label();
       this.ssid_label = new System.Windows.Forms.Label();
-      this.pictureBox2 = new System.Windows.Forms.PictureBox();
       this.status_pictureBox = new System.Windows.Forms.PictureBox();
       this.status_value = new System.Windows.Forms.Label();
       this.ssid_value = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.status_pictureBox)).BeginInit();
       this.SuspendLayout();
       // 
@@ -206,20 +204,6 @@
       this.ssid_label.TabIndex = 77;
       this.ssid_label.Text = "SSID : ";
       // 
-      // pictureBox2
-      // 
-      this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-      this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-      this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-      this.pictureBox2.Location = new System.Drawing.Point(413, 204);
-      this.pictureBox2.Name = "pictureBox2";
-      this.pictureBox2.Size = new System.Drawing.Size(52, 47);
-      this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-      this.pictureBox2.TabIndex = 102;
-      this.pictureBox2.TabStop = false;
-      this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click_1);
-      // 
       // status_pictureBox
       // 
       this.status_pictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -263,7 +247,6 @@
       this.Controls.Add(this.ssid_value);
       this.Controls.Add(this.status_value);
       this.Controls.Add(this.status_pictureBox);
-      this.Controls.Add(this.pictureBox2);
       this.Controls.Add(this.connection_label);
       this.Controls.Add(this.ssid_label);
       this.Controls.Add(this.status_label);
@@ -282,10 +265,8 @@
       this.Name = "Form1";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "VPNSetup";
-      this.Load += new System.EventHandler(this.Form1_Load);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.status_pictureBox)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
@@ -306,7 +287,6 @@
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.Label status_label;
     private System.Windows.Forms.Label ssid_label;
-    private System.Windows.Forms.PictureBox pictureBox2;
     private System.Windows.Forms.PictureBox status_pictureBox;
     private System.Windows.Forms.Label status_value;
     private System.Windows.Forms.Label ssid_value;

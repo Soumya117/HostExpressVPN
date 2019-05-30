@@ -10,18 +10,23 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using Microsoft.VisualBasic;
+using System.Timers;
 
 namespace VPNSetup
 {
   public partial class Form1 : Form
   {
-
+    private static System.Timers.Timer aTimer;
     command cmd = new command();
     ProcessCmd processCmd;
 
     public Form1()
     {
       InitializeComponent();
+      aTimer = new System.Timers.Timer(10000);
+      aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+      aTimer.Interval = 2000;
+      aTimer.Enabled = true;
     }
 
     private void button2_Click(object sender, EventArgs e)
@@ -201,12 +206,7 @@ namespace VPNSetup
       ssid_value.Text = ssid.Trim();
     }
 
-    private void Form1_Load(object sender, EventArgs e)
-    {
-      status();
-    }
-
-    private void pictureBox2_Click_1(object sender, EventArgs e)
+    private void OnTimedEvent(object source, ElapsedEventArgs e)
     {
       status();
     }
