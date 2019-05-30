@@ -202,13 +202,41 @@ namespace VPNSetup
       var view_output = processCmd.getOutput();
       var ssid = extract_hostedNetwork(view_output);
       var status = extract_status(view_output.output);
-      status_value.Text = status.Trim();
-      ssid_value.Text = ssid.Trim();
+      SetStatusText(status.Trim());
+      SetSSIDText(ssid.Trim());
     }
 
     private void OnTimedEvent(object source, ElapsedEventArgs e)
     {
       status();
+    }
+
+    delegate void SetTextCallback(string text);
+
+    private void SetStatusText(string text)
+    {
+      if (this.status_value.InvokeRequired)
+      {
+        SetTextCallback d = new SetTextCallback(SetStatusText);
+        this.Invoke(d, new object[] { text });
+      }
+      else
+      {
+        this.status_value.Text = text;
+      }
+    }
+
+    private void SetSSIDText(string text)
+    {
+      if (this.ssid_value.InvokeRequired)
+      {
+        SetTextCallback d = new SetTextCallback(SetSSIDText);
+        this.Invoke(d, new object[] { text });
+      }
+      else
+      {
+        this.ssid_value.Text = text;
+      }
     }
   }
 }
