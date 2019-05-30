@@ -26,7 +26,7 @@ namespace VPNSetup
 
     private void button2_Click(object sender, EventArgs e)
     {
-      new createNetwork().Show();
+      new createNetwork().ShowDialog(this);
     }
 
     private string extract_hostedNetwork(Output data)

@@ -15,13 +15,13 @@ namespace VPNSetup
     public CheckAvailability()
     {
       InitializeComponent();
+      runSetup();
     }
 
     public void checkInternetConnection()
     {
       label10.Visible = true;
       label10.Text = "Checking...";
-      Thread.Sleep(1000);
       if (InternetInfo.IsInternetAvailable)
       {
         label10.Text = "Available";
@@ -34,7 +34,6 @@ namespace VPNSetup
     {
       label11.Visible = true;
       label11.Text = "Checking...";
-      Thread.Sleep(1000);
       command cmd = new command();
       var show_drivers = cmd.showDrivers();
       ProcessCmd process = new ProcessCmd(show_drivers);
@@ -64,7 +63,6 @@ namespace VPNSetup
     {
       label12.Visible = true;
       label12.Text = "Checking...";
-      Thread.Sleep(1000);
       var adapters = NetworkAdapters.setAdapters();
       if (adapters.SharedConnection != null)
       {
@@ -92,12 +90,8 @@ namespace VPNSetup
       this.Close();
     }
 
-    private void CheckAvailability_Load(object sender, EventArgs e)
+    private void runSetup()
     {
-      label10.Visible = false;
-      label11.Visible = false;
-      label12.Visible = false;
-      label13.Visible = false;
       checkInternetConnection();
       checkHostedNetwork();
       checkEpressVPNAdapter();

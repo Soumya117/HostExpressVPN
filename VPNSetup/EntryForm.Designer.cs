@@ -54,6 +54,7 @@
       this.label1.AutoSize = true;
       this.label1.BackColor = System.Drawing.Color.Transparent;
       this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
       this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
       this.label1.Location = new System.Drawing.Point(64, 64);
@@ -68,6 +69,7 @@
       this.label2.AutoSize = true;
       this.label2.BackColor = System.Drawing.Color.Transparent;
       this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
       this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
       this.label2.Location = new System.Drawing.Point(64, 103);

@@ -66,7 +66,7 @@
       this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label1.Location = new System.Drawing.Point(12, 63);
+      this.label1.Location = new System.Drawing.Point(34, 44);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(220, 26);
       this.label1.TabIndex = 72;
@@ -78,7 +78,7 @@
       this.label2.BackColor = System.Drawing.Color.Transparent;
       this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label2.Location = new System.Drawing.Point(12, 156);
+      this.label2.Location = new System.Drawing.Point(34, 137);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(241, 20);
       this.label2.TabIndex = 73;
@@ -90,7 +90,7 @@
       this.label3.BackColor = System.Drawing.Color.Transparent;
       this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label3.Location = new System.Drawing.Point(12, 116);
+      this.label3.Location = new System.Drawing.Point(34, 97);
       this.label3.Name = "label3";
       this.label3.Size = new System.Drawing.Size(150, 20);
       this.label3.TabIndex = 73;
@@ -102,7 +102,7 @@
       this.label4.BackColor = System.Drawing.Color.Transparent;
       this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label4.Location = new System.Drawing.Point(12, 200);
+      this.label4.Location = new System.Drawing.Point(34, 181);
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(163, 20);
       this.label4.TabIndex = 74;
@@ -114,7 +114,7 @@
       this.label5.BackColor = System.Drawing.Color.Transparent;
       this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label5.Location = new System.Drawing.Point(12, 243);
+      this.label5.Location = new System.Drawing.Point(34, 224);
       this.label5.Name = "label5";
       this.label5.Size = new System.Drawing.Size(209, 20);
       this.label5.TabIndex = 75;
@@ -126,7 +126,7 @@
       this.label6.BackColor = System.Drawing.Color.Transparent;
       this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label6.Location = new System.Drawing.Point(281, 116);
+      this.label6.Location = new System.Drawing.Point(303, 97);
       this.label6.Name = "label6";
       this.label6.Size = new System.Drawing.Size(13, 20);
       this.label6.TabIndex = 76;
@@ -138,7 +138,7 @@
       this.label7.BackColor = System.Drawing.Color.Transparent;
       this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label7.Location = new System.Drawing.Point(281, 156);
+      this.label7.Location = new System.Drawing.Point(303, 137);
       this.label7.Name = "label7";
       this.label7.Size = new System.Drawing.Size(13, 20);
       this.label7.TabIndex = 77;
@@ -150,7 +150,7 @@
       this.label8.BackColor = System.Drawing.Color.Transparent;
       this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label8.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label8.Location = new System.Drawing.Point(281, 200);
+      this.label8.Location = new System.Drawing.Point(303, 181);
       this.label8.Name = "label8";
       this.label8.Size = new System.Drawing.Size(13, 20);
       this.label8.TabIndex = 78;
@@ -162,7 +162,7 @@
       this.label9.BackColor = System.Drawing.Color.Transparent;
       this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label9.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label9.Location = new System.Drawing.Point(281, 243);
+      this.label9.Location = new System.Drawing.Point(303, 224);
       this.label9.Name = "label9";
       this.label9.Size = new System.Drawing.Size(13, 20);
       this.label9.TabIndex = 79;
@@ -174,12 +174,10 @@
       this.label10.BackColor = System.Drawing.Color.Transparent;
       this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label10.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label10.Location = new System.Drawing.Point(333, 116);
+      this.label10.Location = new System.Drawing.Point(355, 97);
       this.label10.Name = "label10";
-      this.label10.Size = new System.Drawing.Size(65, 18);
+      this.label10.Size = new System.Drawing.Size(0, 18);
       this.label10.TabIndex = 81;
-      this.label10.Text = "Available";
-      this.label10.Visible = false;
       // 
       // label11
       // 
@@ -187,12 +185,10 @@
       this.label11.BackColor = System.Drawing.Color.Transparent;
       this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label11.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label11.Location = new System.Drawing.Point(333, 157);
+      this.label11.Location = new System.Drawing.Point(355, 138);
       this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(83, 18);
+      this.label11.Size = new System.Drawing.Size(0, 18);
       this.label11.TabIndex = 82;
-      this.label11.Text = "Unavailable";
-      this.label11.Visible = false;
       // 
       // label12
       // 
@@ -200,12 +196,10 @@
       this.label12.BackColor = System.Drawing.Color.Transparent;
       this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label12.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label12.Location = new System.Drawing.Point(333, 202);
+      this.label12.Location = new System.Drawing.Point(355, 183);
       this.label12.Name = "label12";
-      this.label12.Size = new System.Drawing.Size(83, 18);
+      this.label12.Size = new System.Drawing.Size(0, 18);
       this.label12.TabIndex = 83;
-      this.label12.Text = "Unavailable";
-      this.label12.Visible = false;
       // 
       // label13
       // 
@@ -213,12 +207,10 @@
       this.label13.BackColor = System.Drawing.Color.Transparent;
       this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label13.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label13.Location = new System.Drawing.Point(333, 245);
+      this.label13.Location = new System.Drawing.Point(355, 226);
       this.label13.Name = "label13";
-      this.label13.Size = new System.Drawing.Size(83, 18);
+      this.label13.Size = new System.Drawing.Size(0, 18);
       this.label13.TabIndex = 84;
-      this.label13.Text = "Unavailable";
-      this.label13.Visible = false;
       // 
       // CheckAvailability
       // 
@@ -243,8 +235,8 @@
       this.Controls.Add(this.pictureBox4);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "CheckAvailability";
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "CheckAvailability";
-      this.Load += new System.EventHandler(this.CheckAvailability_Load);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();

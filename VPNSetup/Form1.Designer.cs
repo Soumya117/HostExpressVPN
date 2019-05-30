@@ -79,6 +79,7 @@
       this.linkLabel1.Anchor = System.Windows.Forms.AnchorStyles.None;
       this.linkLabel1.AutoSize = true;
       this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
+      this.linkLabel1.Cursor = System.Windows.Forms.Cursors.Hand;
       this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
       this.linkLabel1.Location = new System.Drawing.Point(20, 241);
@@ -111,6 +112,7 @@
       this.linkLabel2.Anchor = System.Windows.Forms.AnchorStyles.None;
       this.linkLabel2.AutoSize = true;
       this.linkLabel2.BackColor = System.Drawing.Color.Transparent;
+      this.linkLabel2.Cursor = System.Windows.Forms.Cursors.Hand;
       this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
       this.linkLabel2.Location = new System.Drawing.Point(21, 222);
