@@ -41,7 +41,7 @@
       this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
       this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
       this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-      this.pictureBox4.Location = new System.Drawing.Point(475, 12);
+      this.pictureBox4.Location = new System.Drawing.Point(433, 9);
       this.pictureBox4.Name = "pictureBox4";
       this.pictureBox4.Size = new System.Drawing.Size(21, 20);
       this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -57,7 +57,7 @@
       this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
       this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label1.Location = new System.Drawing.Point(64, 64);
+      this.label1.Location = new System.Drawing.Point(22, 64);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(160, 22);
       this.label1.TabIndex = 73;
@@ -72,7 +72,7 @@
       this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
       this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-      this.label2.Location = new System.Drawing.Point(64, 103);
+      this.label2.Location = new System.Drawing.Point(22, 102);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(139, 22);
       this.label2.TabIndex = 74;
@@ -86,7 +86,7 @@
       this.label3.Cursor = System.Windows.Forms.Cursors.Arrow;
       this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.label3.Location = new System.Drawing.Point(204, 12);
+      this.label3.Location = new System.Drawing.Point(204, 9);
       this.label3.Name = "label3";
       this.label3.Size = new System.Drawing.Size(88, 20);
       this.label3.TabIndex = 75;
@@ -100,7 +100,7 @@
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
       this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
       this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-      this.ClientSize = new System.Drawing.Size(508, 165);
+      this.ClientSize = new System.Drawing.Size(466, 154);
       this.Controls.Add(this.label3);
       this.Controls.Add(this.label2);
       this.Controls.Add(this.label1);

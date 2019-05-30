@@ -159,5 +159,56 @@ namespace VPNSetup
     {
       this.Close();
     }
+
+    private void setInternetConnectionStatus()
+    {
+      if (InternetInfo.IsInternetAvailable)
+      {
+        status_pictureBox.Image = VPNSetup.Properties.Resources.imageedit_7_4663135021_new;
+      }
+      else
+      {
+        status_pictureBox.Image = VPNSetup.Properties.Resources.Webp_net_resizeimage;
+      }
+    }
+
+    private string extract_status(string data)
+    {
+      string status = String.Empty;
+      string[] lines = data.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+      foreach (var line in lines)
+      {
+        if (line != null && line.Contains("Status"))
+        {
+          var result_str = line.ToString();
+          status = line.Split(':')[1];
+          break;
+        }
+      }
+      return status;
+    }
+
+    private void status()
+    {
+      setInternetConnectionStatus();
+      var show_cmd = cmd.viewHostedNetwork();
+      processCmd = new ProcessCmd(show_cmd);
+      processCmd.start();
+      var view_output = processCmd.getOutput();
+      var ssid = extract_hostedNetwork(view_output);
+      var status = extract_status(view_output.output);
+      status_value.Text = status.Trim();
+      ssid_value.Text = ssid.Trim();
+    }
+
+    private void Form1_Load(object sender, EventArgs e)
+    {
+      status();
+    }
+
+    private void pictureBox2_Click_1(object sender, EventArgs e)
+    {
+      status();
+    }
   }
 }

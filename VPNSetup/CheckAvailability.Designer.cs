@@ -68,9 +68,9 @@
       this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
       this.label1.Location = new System.Drawing.Point(34, 44);
       this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(220, 26);
+      this.label1.Size = new System.Drawing.Size(141, 26);
       this.label1.TabIndex = 72;
-      this.label1.Text = "Checking prerequisites...";
+      this.label1.Text = " Prerequisites...";
       // 
       // label2
       // 
