@@ -37,5 +37,11 @@ namespace VPNSetup
       var show_pwd = "netsh wlan show hostedNetwork security";
       return show_pwd;
     }
+
+    public string showDrivers()
+    {
+      var show_drivers = "netsh wlan show drivers";
+      return show_drivers;
+    }
   }
 }

@@ -21,3 +21,5 @@ Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.createNetwork.resources
 Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.Form1.resources
 Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.Properties.Resources.resources
 Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.csproj.GenerateResource.Cache
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.EntryForm.resources
+Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.CheckAvailability.resources

@@ -144,5 +144,20 @@ namespace VPNSetup
         MessageBox.Show("Password Changed successfully");
       }
     }
+
+    private void pictureBox2_Click(object sender, EventArgs e)
+    {
+      Services.startServices();
+
+      if (!InternetInfo.IsInternetAvailable)
+      {
+        MessageBox.Show("Please check your internet connection", "Error");
+      }
+    }
+
+    private void pictureBox4_Click(object sender, EventArgs e)
+    {
+      this.Close();
+    }
   }
 }
