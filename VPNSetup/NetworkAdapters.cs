@@ -36,7 +36,7 @@ namespace VPNSetup
       return new NetShare(shareConnection, homeConnection);
     }
 
-    public static void disable()
+    public static void disableSharing()
     {
       var adapters = setAdapters();
       IcsManager.disableSharing(adapters.SharedConnection, adapters.HomeConnection);

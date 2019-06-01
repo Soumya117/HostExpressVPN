@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
@@ -92,7 +92,7 @@ namespace VPNSetup
       }
       extract_hostedNetwork(result);
       var connect_output = start_hostedNertwork();
-      NetworkAdapters.enableExpressVPNAdapter();
+      //NetworkAdapters.enableExpressVPNAdapter();
       NetworkAdapters.enableSharing();
       display_result(connect_output);
     }
@@ -222,6 +222,10 @@ namespace VPNSetup
       processCmd = new ProcessCmd(show_cmd);
       processCmd.start();
       var view_output = processCmd.getOutput();
+      if(String.IsNullOrEmpty(view_output))
+      {
+        return;
+      }
       var ssid = extract_hostedNetwork(view_output);
       var status = extract_status(view_output);
       SetStatusText(status.Trim());

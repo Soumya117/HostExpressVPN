@@ -31,10 +31,6 @@ namespace VPNSetup
 
     public string getOutput()
     {
-      if(String.IsNullOrEmpty(result))
-      {
-        MessageBox.Show("Something went wrong", "Info");
-      }
       return result;
     }
 
