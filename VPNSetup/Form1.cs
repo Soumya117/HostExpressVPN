@@ -27,6 +27,9 @@ namespace VPNSetup
       aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
       aTimer.Interval = 2000;
       aTimer.Enabled = true;
+      this.ssid_value.Text = "Checking...";
+      this.status_value.Text = "Checking...";
+      status();
     }
 
     private void button2_Click(object sender, EventArgs e)
@@ -34,9 +37,12 @@ namespace VPNSetup
       new createNetwork().ShowDialog(this);
     }
 
-    private string extract_hostedNetwork(Output data)
+    private string extract_hostedNetwork(string result)
     {
-      var result = data.output;
+      if(String.IsNullOrEmpty(result))
+      {
+        return null;
+      }
       string hostedNetwork = String.Empty;
       string[] lines = result.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
       foreach (var line in lines)
@@ -52,7 +58,7 @@ namespace VPNSetup
       return hostedNetwork;
     }
 
-    private Output start_hostedNertwork()
+    private string start_hostedNertwork()
     {
       var start_cmd = cmd.startHostedNetwork();
       processCmd = new ProcessCmd(start_cmd);
@@ -61,42 +67,44 @@ namespace VPNSetup
       return connect_output;
     }
 
-    private void display_hostedNetwork(Output result)
+    private void display_result(string result)
     {
-      if (result.output != null)
+      if (result != null)
       {
-        MessageBox.Show(result.output, "Status");
-      }
-    }
-
-    private void stop_hostedNetwork(Output result)
-    {
-      if (result.output != null)
-      {
-        MessageBox.Show(result.output, "Status");
+        MessageBox.Show(result, "Status");
       }
     }
 
     private void button1_Click(object sender, EventArgs e)
     {
+      if(this.status_value.Text == "Started")
+      {
+        MessageBox.Show("HostedNetwork Already Started");
+        return;
+      }
       var show_cmd = cmd.viewHostedNetwork();
       processCmd = new ProcessCmd(show_cmd);
       processCmd.start();
-      var view_output = processCmd.getOutput();
-      extract_hostedNetwork(view_output);
+      var result = processCmd.getOutput();
+      if(String.IsNullOrEmpty(result))
+      {
+        return;
+      }
+      extract_hostedNetwork(result);
       var connect_output = start_hostedNertwork();
-      NetworkAdapters.enable();
-      display_hostedNetwork(connect_output);
+      NetworkAdapters.enableExpressVPNAdapter();
+      NetworkAdapters.enableSharing();
+      display_result(connect_output);
     }
 
     private void button3_Click(object sender, EventArgs e)
     {
+      NetworkAdapters.disable();
       var stop_cmd = cmd.stopHostedNetwork();
       processCmd = new ProcessCmd(stop_cmd);
       processCmd.start();
       var stop_output = processCmd.getOutput();
-      NetworkAdapters.disable();
-      stop_hostedNetwork(stop_output);
+      display_result(stop_output);
     }
 
     private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -108,9 +116,14 @@ namespace VPNSetup
       show_password(show_output);
     }
 
-    private void show_password(Output result)
+    private void show_password(string result)
     {
-      string[] lines = result.output.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+      if(String.IsNullOrEmpty(result))
+      {
+        return;
+      }
+
+      string[] lines = result.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
       foreach (string line in lines)
       {
         if (line.Contains("User security key"))
@@ -124,7 +137,12 @@ namespace VPNSetup
 
     private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
-      string password = Interaction.InputBox("Enter new password", "Input", "", -1, -1);
+      string password = Interaction.InputBox(
+      "Enter new password", 
+      "Input", 
+      "",
+      -1, 
+      -1);
       if (password.Length > 0)
       {
         var show_cmd = cmd.viewHostedNetwork();
@@ -136,15 +154,15 @@ namespace VPNSetup
         processCmd = new ProcessCmd(create_cmd);
         processCmd.start();
         var create_output = processCmd.getOutput();
-        create_hostedNetwork(create_output);
+        show_passwordChangeSuccess(create_output);
       }
       else
         return;
     }
 
-    private void create_hostedNetwork(Output result)
+    private void show_passwordChangeSuccess(string result)
     {
-      if (!String.IsNullOrEmpty(result.output))
+      if (!String.IsNullOrEmpty(result))
       {
         MessageBox.Show("Password Changed successfully");
       }
@@ -179,6 +197,10 @@ namespace VPNSetup
 
     private string extract_status(string data)
     {
+      if(String.IsNullOrEmpty(data))
+      {
+        return null;
+      }
       string status = String.Empty;
       string[] lines = data.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
       foreach (var line in lines)
@@ -201,7 +223,7 @@ namespace VPNSetup
       processCmd.start();
       var view_output = processCmd.getOutput();
       var ssid = extract_hostedNetwork(view_output);
-      var status = extract_status(view_output.output);
+      var status = extract_status(view_output);
       SetStatusText(status.Trim());
       SetSSIDText(ssid.Trim());
     }
@@ -215,6 +237,11 @@ namespace VPNSetup
 
     private void SetStatusText(string text)
     {
+      if(String.IsNullOrEmpty(text))
+      {
+        return;
+      }
+
       if (this.status_value.InvokeRequired)
       {
         SetTextCallback d = new SetTextCallback(SetStatusText);
@@ -228,6 +255,11 @@ namespace VPNSetup
 
     private void SetSSIDText(string text)
     {
+      if (String.IsNullOrEmpty(text))
+      {
+        return;
+      }
+
       if (this.ssid_value.InvokeRequired)
       {
         SetTextCallback d = new SetTextCallback(SetSSIDText);

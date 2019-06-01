@@ -23,3 +23,15 @@ Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.Properties.Resources.resource
 Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.csproj.GenerateResource.Cache
 Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.EntryForm.resources
 Z:\GIT\GITVPN\VPNSetup\VPNSetup\obj\Debug\VPNSetup.CheckAvailability.resources
+D:\GIT\VPNSetup\VPN\VPNSetup\bin\Debug\VPNSetup.exe.config
+D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.exe
+D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.pdb
+D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.csprojResolveAssemblyReference.cache
+D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.CheckAvailability.resources
+D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.createNetwork.resources
+D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.EntryForm.resources
+D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.Form1.resources
+D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.Properties.Resources.resources
+D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.csproj.GenerateResource.Cache
+D:\GIT\VPNSetup\VPN\VPNSetup\bin\Debug\VPNSetup.exe
+D:\GIT\VPNSetup\VPN\VPNSetup\bin\Debug\VPNSetup.pdb

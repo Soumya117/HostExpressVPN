@@ -43,5 +43,18 @@ namespace VPNSetup
       var show_drivers = "netsh wlan show drivers";
       return show_drivers;
     }
+
+    public string showAdapters()
+    {
+      var show_adapters = "netsh interface show interface";
+      return show_adapters;
+    }
+
+    public string enableAdapter(string name)
+    {
+      var enable_adapter = "netsh interface set interface "+name+" enable";
+      return enable_adapter;
+    }
+
   }
 }

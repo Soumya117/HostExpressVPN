@@ -9,17 +9,10 @@ using System.Windows;
 
 namespace VPNSetup
 {
-
-  public struct Output
-  {
-    public string output;
-    public string error;
-  }
-
   public class ProcessCmd
   {
     Process process;
-    public Output result; 
+    public string result; 
 
     public ProcessCmd(string arguments)
     {
@@ -36,20 +29,36 @@ namespace VPNSetup
       process.StartInfo = startInfo;
     }
 
-    public Output getOutput()
+    public string getOutput()
     {
+      if(String.IsNullOrEmpty(result))
+      {
+        MessageBox.Show("Something went wrong", "Info");
+      }
       return result;
     }
 
     public void start()
     {
       process.Start();
-      var output = process.StandardOutput.ReadToEnd();
-      output.Trim().Replace("\r", string.Empty);
-      output.Trim().Replace("\n", string.Empty);
-      result.output = output;
-      result.error = process.StandardError.ReadToEnd();
+      var success = process.StandardOutput.ReadToEnd();
+      var error = process.StandardError.ReadToEnd();
+
+      if(!String.IsNullOrEmpty(error))
+      {
+        MessageBox.Show(error, "Error");
+      }
+
+      result = success;
+      trim_output(result);
+
       process.WaitForExit();
+    }
+
+    private void trim_output(string result)
+    {
+      result.Trim().Replace("\r", string.Empty);
+      result.Trim().Replace("\n", string.Empty);
     }
   }
 }

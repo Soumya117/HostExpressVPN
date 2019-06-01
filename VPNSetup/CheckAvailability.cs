@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Net.NetworkInformation;
 
 namespace VPNSetup
 {
@@ -38,7 +39,11 @@ namespace VPNSetup
       var show_drivers = cmd.showDrivers();
       ProcessCmd process = new ProcessCmd(show_drivers);
       process.start();
-      var show_output = process.getOutput().output;
+      var show_output = process.getOutput();
+      if(String.IsNullOrEmpty(show_output))
+      {
+        return;
+      }
       string status = String.Empty;
       string[] lines = show_output.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
       foreach (var line in lines)
@@ -63,7 +68,9 @@ namespace VPNSetup
     {
       label12.Visible = true;
       label12.Text = "Checking...";
+      NetworkAdapters.enableExpressVPNAdapter();
       var adapters = NetworkAdapters.setAdapters();
+
       if (adapters.SharedConnection != null)
       {
         label12.Text = "Available";

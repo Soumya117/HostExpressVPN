@@ -14,11 +14,11 @@ namespace VPNSetup
       InitializeComponent();
     }
 
-    public void create_hostedNetwork(Output result)
+    public void create_hostedNetwork(string result)
     {
-      if(!String.IsNullOrEmpty(result.output))
+      if(!String.IsNullOrEmpty(result))
       {
-        var message = MessageBox.Show(result.output, "Status", MessageBoxButtons.OK);
+        var message = MessageBox.Show(result, "Status", MessageBoxButtons.OK);
         if (message == DialogResult.OK)
         {
           this.Hide();
@@ -28,6 +28,7 @@ namespace VPNSetup
 
     private void button1_Click(object sender, EventArgs e)
     {
+      NetworkAdapters.disable();
       var create_cmd = cmd.createHostedNetwork(textBox1.Text, textBox2.Text);
       processCmd = new ProcessCmd(create_cmd);
       processCmd.start();
