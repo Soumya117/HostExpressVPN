@@ -13,10 +13,10 @@ namespace VPNSetup
 {
   public partial class CheckAvailability : Form
   {
+
     public CheckAvailability()
     {
       InitializeComponent();
-      runSetup();
     }
 
     public void checkInternetConnection()
@@ -97,7 +97,7 @@ namespace VPNSetup
       this.Close();
     }
 
-    private void runSetup()
+    public void runSetup()
     {
       checkInternetConnection();
       checkHostedNetwork();

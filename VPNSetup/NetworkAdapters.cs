@@ -23,14 +23,12 @@ namespace VPNSetup
         if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet &&
          nic.Description == "ExpressVPN Tap Adapter")
         {
-          Console.WriteLine("ExpreeVPN ID: " + nic.Id);
           shareConnection = IcsManager.FindConnectionByIdOrName(nic.Id);
         }
 
         if(nic.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 &&
          nic.Description == "Microsoft Hosted Network Virtual Adapter")
         {
-          Console.WriteLine("Hosted network ID: " + nic.Id);
           homeConnection = IcsManager.FindConnectionByIdOrName(nic.Id);
         }
 

@@ -35,3 +35,4 @@ D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.Properties.Resources.resources
 D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.csproj.GenerateResource.Cache
 D:\GIT\VPNSetup\VPN\VPNSetup\bin\Debug\VPNSetup.exe
 D:\GIT\VPNSetup\VPN\VPNSetup\bin\Debug\VPNSetup.pdb
+D:\GIT\VPNSetup\VPN\VPNSetup\obj\Debug\VPNSetup.wait.resources

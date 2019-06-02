@@ -19,7 +19,7 @@ namespace VPNSetup
     private static System.Timers.Timer aTimer;
     command cmd = new command();
     ProcessCmd processCmd;
-
+    wait wait_dialog;
     public Form1()
     {
       InitializeComponent();
@@ -74,12 +74,31 @@ namespace VPNSetup
         MessageBox.Show(result, "Status");
       }
     }
-
-    private void button1_Click(object sender, EventArgs e)
+    private void StartWork()
     {
-      if(this.status_value.Text == "Started")
+      wait_dialog = new wait();
+      wait_dialog.Show();
+      BackgroundWorker worker = new BackgroundWorker();
+      worker.DoWork += connectToNetwork;
+      worker.RunWorkerCompleted += WorkerCompleted;
+      worker.RunWorkerAsync();
+    }
+
+    private void connectToNetwork(object sender, DoWorkEventArgs e)
+    {
+      connectHostedNetwork();
+    }
+
+    private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+      wait_dialog.Close();
+    }
+
+    private void connectHostedNetwork()
+    {
+      if (this.status_value.Text == "Started")
       {
-        MessageBox.Show("Hosted network already started");
+        MessageBox.Show("Hosted network already started", "Info");
         return;
       }
 
@@ -89,7 +108,7 @@ namespace VPNSetup
       processCmd = new ProcessCmd(show_cmd);
       processCmd.start();
       var result = processCmd.getOutput();
-      if(String.IsNullOrEmpty(result))
+      if (String.IsNullOrEmpty(result))
       {
         return;
       }
@@ -100,13 +119,39 @@ namespace VPNSetup
       display_result(connect_output);
     }
 
-    private void button3_Click(object sender, EventArgs e)
+    private void button1_Click(object sender, EventArgs e)
     {
+      StartWork();
+    }
+
+    private void StopWork()
+    {
+      wait_dialog = new wait();
+      wait_dialog.Show();
+      BackgroundWorker worker = new BackgroundWorker();
+      worker.DoWork += stopTheNetwork;
+      worker.RunWorkerCompleted += WorkerCompleted;
+      worker.RunWorkerAsync();
+    }
+
+    private void stopTheNetwork(object sender, DoWorkEventArgs e)
+    {
+      if (this.status_value.Text == "Not started")
+      {
+        MessageBox.Show("Hosted network not running..", "Info");
+        return;
+      }
+
       var stop_cmd = cmd.stopHostedNetwork();
       processCmd = new ProcessCmd(stop_cmd);
       processCmd.start();
       var stop_output = processCmd.getOutput();
       display_result(stop_output);
+    }
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+      StopWork();
     }
 
     private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
