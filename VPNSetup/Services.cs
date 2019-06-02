@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.ServiceProcess;
 using System.Windows.Forms;
+using System.Management;
 
 namespace VPNSetup
 {
@@ -40,11 +41,51 @@ namespace VPNSetup
 
     public static bool startServices()
     {
-     var remoteController = start("RemoteAccess");
-     var sharedController = start("SharedAccess");
+       var remoteController = start("RemoteAccess");
+       changeStartup("RemoteAccess");
 
-     return remoteController.Status == ServiceControllerStatus.Running 
+       var sharedController = start("SharedAccess");
+       changeStartup("SharedAccess");
+
+       return remoteController.Status == ServiceControllerStatus.Running 
         && sharedController.Status == ServiceControllerStatus.Running;
+    }
+
+    public static void changeStartup(string service_name)
+    {
+      var remoteStartup = StartupType(service_name);
+      if(!String.IsNullOrEmpty(remoteStartup) && remoteStartup != "Auto")
+      {
+        configureStartup(service_name);
+      }
+    }
+
+    public static string StartupType(string serviceName)
+    {
+      string startupType = String.Empty;
+
+        if (serviceName != null)
+        {
+          string path = "Win32_Service.Name='" + serviceName + "'";
+          ManagementPath p = new ManagementPath(path);
+          ManagementObject ManagementObj = new ManagementObject(p);
+          startupType =  ManagementObj["StartMode"].ToString();
+        }
+      return startupType;
+    }
+
+    public static void configureStartup(string serviceName)
+    {
+      var value = "Automatic";
+      if (serviceName != null)
+      {
+        string path = "Win32_Service.Name='" + serviceName + "'";
+        ManagementPath p = new ManagementPath(path);
+        ManagementObject ManagementObj = new ManagementObject(p);
+        object[] parameters = new object[1];
+        parameters[0] = value;
+        ManagementObj.InvokeMethod("ChangeStartMode", parameters);
+      }
     }
   }
 }

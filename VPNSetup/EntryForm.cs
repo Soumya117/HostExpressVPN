@@ -14,6 +14,7 @@ namespace VPNSetup
   {
     wait wait_dialog;
     CheckAvailability check = new CheckAvailability();
+
     public EntryForm()
     {
       InitializeComponent();
