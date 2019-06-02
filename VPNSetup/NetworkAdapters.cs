@@ -23,12 +23,14 @@ namespace VPNSetup
         if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet &&
          nic.Description == "ExpressVPN Tap Adapter")
         {
+          Console.WriteLine("ExpreeVPN ID: " + nic.Id);
           shareConnection = IcsManager.FindConnectionByIdOrName(nic.Id);
         }
 
         if(nic.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 &&
          nic.Description == "Microsoft Hosted Network Virtual Adapter")
         {
+          Console.WriteLine("Hosted network ID: " + nic.Id);
           homeConnection = IcsManager.FindConnectionByIdOrName(nic.Id);
         }
 
@@ -102,12 +104,142 @@ namespace VPNSetup
       {
         if (((string)item["Name"]) == "ExpressVPN Tap Adapter")
         {
-          Console.WriteLine("NetConnectionID : {0}", item["NetConnectionID"]);
           adpater_name = (item["NetConnectionID"]).ToString();
           break;
         }
       }
       return adpater_name;
+    }
+
+    public static void enableNetShare()
+    {
+      var adapters = setAdapters();
+      var id_share = IcsManager.GetProperties(adapters.SharedConnection).Guid;
+      setPropertiesTrue("IsIcsPublic", id_share);
+
+      var id_home = IcsManager.GetProperties(adapters.HomeConnection).Guid;
+      setPropertiesTrue("IsIcsPrivate", id_home);
+    }
+
+    public static void disableNetShare()
+    {
+      var adapters = setAdapters();
+
+      var id_share = IcsManager.GetProperties(adapters.SharedConnection).Guid;
+      setPropertiesFalse("IsIcsPublic", id_share);
+
+      var id_home = IcsManager.GetProperties(adapters.HomeConnection).Guid;
+      setPropertiesFalse("IsIcsPrivate", id_home);
+    }
+
+    public static void setPropertiesFalse(string flag, string guid)
+    {
+      ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\Microsoft\\HomeNet");
+
+      ObjectQuery query = new ObjectQuery("SELECT * FROM HNet_ConnectionProperties ");
+
+      ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
+      ManagementObjectCollection queryCollection = searcher.Get();
+
+      foreach (ManagementObject m in queryCollection)
+      {
+        var conn_uid = m["Connection"].ToString();
+        conn_uid = string.Join(" ", conn_uid.Split('"').Where((x, i) => i % 2 != 0));
+        if (conn_uid == guid)
+        {
+          try
+          {
+            PropertyDataCollection properties = m.Properties;
+            foreach (PropertyData prop in properties)
+            {
+              if (prop.Name == flag && ((Boolean)prop.Value) == true)
+              {
+                prop.Value = false;
+                m.Put();
+                break;
+              }
+            }
+          }
+          catch (Exception e)
+          {
+            Console.WriteLine("ex " + e.Message);
+            continue;
+          }
+          break;
+        }
+      }
+    }
+
+    public static void setPropertiesTrue(string flag, string guid) 
+    {
+      ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\Microsoft\\HomeNet");
+
+      ObjectQuery query = new ObjectQuery("SELECT * FROM HNet_ConnectionProperties ");
+
+      ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
+      ManagementObjectCollection queryCollection = searcher.Get();
+
+      foreach (ManagementObject m in queryCollection)
+      {
+        var conn_uid = m["Connection"].ToString();
+        conn_uid = string.Join(" ", conn_uid.Split('"').Where((x, i) => i % 2 != 0));
+        if (conn_uid == guid)
+        {
+          try
+          {
+            PropertyDataCollection properties = m.Properties;
+            foreach (PropertyData prop in properties)
+            {
+              if (prop.Name == flag && ((Boolean)prop.Value) == false)
+              {
+                prop.Value = true;
+                m.Put();
+                break;
+              }
+            }
+          }
+          catch (Exception e)
+          {
+            Console.WriteLine("ex " + e.Message);
+            continue;
+          }
+          break;
+        }
+      }
+    }
+
+    public static void Disable_ICS_WMI()
+    {
+      ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\Microsoft\\HomeNet");
+
+      ObjectQuery query = new ObjectQuery("SELECT * FROM HNet_ConnectionProperties ");
+
+      ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
+      ManagementObjectCollection queryCollection = searcher.Get();
+
+      foreach (ManagementObject m in queryCollection)
+      {
+        try
+        {
+          PropertyDataCollection properties = m.Properties;
+          foreach (PropertyData prop in properties)
+          {
+            if (prop.Name == "IsIcsPrivate" && ((Boolean)prop.Value) == true)
+            {
+              Console.WriteLine("Private Connection : {0}", m["Connection"]);
+            }
+            else if (prop.Name == "IsIcsPublic" && ((Boolean)prop.Value) == true)
+            {
+              Console.WriteLine("Public Connection : {0}", m["Connection"]);
+            }
+          }
+        }
+        catch (Exception e)
+        {
+          Console.WriteLine("ex " + e.Message);
+          continue;
+        }
+      }
     }
   }
 }

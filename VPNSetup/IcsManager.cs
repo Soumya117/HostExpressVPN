@@ -67,7 +67,6 @@ namespace VPNSetup
 
     public static INetSharingConfiguration GetConfiguration(INetConnection connection)
     {
-
       if( GetProperties(connection).Name != "Incoming Connections")
       {
         return SharingManager.get_INetSharingConfigurationForINetConnection(connection);

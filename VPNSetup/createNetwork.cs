@@ -28,7 +28,6 @@ namespace VPNSetup
 
     private void button1_Click(object sender, EventArgs e)
     {
-      NetworkAdapters.disable();
       var create_cmd = cmd.createHostedNetwork(textBox1.Text, textBox2.Text);
       processCmd = new ProcessCmd(create_cmd);
       processCmd.start();

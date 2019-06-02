@@ -103,6 +103,7 @@ namespace VPNSetup
       checkHostedNetwork();
       checkEpressVPNAdapter();
       checkServices();
+      NetworkAdapters.Disable_ICS_WMI();
     }
   }
 }

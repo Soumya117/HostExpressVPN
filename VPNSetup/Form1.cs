@@ -79,9 +79,12 @@ namespace VPNSetup
     {
       if(this.status_value.Text == "Started")
       {
-        MessageBox.Show("HostedNetwork Already Started");
+        MessageBox.Show("Hosted network already started");
         return;
       }
+
+      NetworkAdapters.enableExpressVPNAdapter();
+
       var show_cmd = cmd.viewHostedNetwork();
       processCmd = new ProcessCmd(show_cmd);
       processCmd.start();
@@ -92,14 +95,13 @@ namespace VPNSetup
       }
       extract_hostedNetwork(result);
       var connect_output = start_hostedNertwork();
-      //NetworkAdapters.enableExpressVPNAdapter();
-      NetworkAdapters.enableSharing();
+      NetworkAdapters.disableNetShare();
+      NetworkAdapters.enableNetShare();
       display_result(connect_output);
     }
 
     private void button3_Click(object sender, EventArgs e)
     {
-      NetworkAdapters.disable();
       var stop_cmd = cmd.stopHostedNetwork();
       processCmd = new ProcessCmd(stop_cmd);
       processCmd.start();
