@@ -59,9 +59,9 @@
       this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
       this.label1.Location = new System.Drawing.Point(22, 64);
       this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(160, 22);
+      this.label1.Size = new System.Drawing.Size(124, 22);
       this.label1.TabIndex = 73;
-      this.label1.Text = "Check Requirements";
+      this.label1.Text = "Run initial setup";
       this.label1.Click += new System.EventHandler(this.label1_Click);
       // 
       // label2

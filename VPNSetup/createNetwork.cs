@@ -64,6 +64,12 @@ namespace VPNSetup
 
     private void button1_Click(object sender, EventArgs e)
     {
+      if(String.IsNullOrEmpty(this.textBox1.Text)
+       || String.IsNullOrEmpty(this.textBox2.Text))
+      {
+        MessageBox.Show("Both host name and password is required!", "Info");
+        return;
+      }
       StartWork();
     }
 
