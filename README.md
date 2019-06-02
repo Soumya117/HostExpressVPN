@@ -6,7 +6,7 @@ Usage:
 
 Run the .exe file with admin privileges. 
 The welcome screen contains two functions to call.
-1. Check Requirements - Performs initial setup required for the hosted network.
+1. Run initial setup - Performs initial setup required for the hosted network.
 2. Configure Sharing - Opens another form to stop/start/view hosted network.
 
 Configure Sharing:
