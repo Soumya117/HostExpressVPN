@@ -7,6 +7,11 @@ Usage:
 Run the .exe file with admin privileges. 
 The welcome screen contains two functions to call.
 1. Run initial setup - Performs initial setup required for the hosted network.
+ -Starts the necessary services (RemoteAccess and SharedAccess).
+ -Check ExpressVPN Adapter (Enable if not)
+ -Check for internet connection.
+ -Check if machine supports Microsoft Virtual Hosted Network.
+ 
 2. Configure Sharing - Opens another form to stop/start/view hosted network.
 
 Configure Sharing:
