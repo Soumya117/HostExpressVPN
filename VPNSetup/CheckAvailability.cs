@@ -13,6 +13,7 @@ namespace VPNSetup
 {
   public partial class CheckAvailability : Form
   {
+    public static bool isHostedNetworkSupported = false;
 
     public CheckAvailability()
     {
@@ -61,7 +62,10 @@ namespace VPNSetup
       if (status == "No")
         label11.Text = "Not Supported";
       else if (status == "Yes")
+      {
         label11.Text = "Supported";
+        isHostedNetworkSupported = true;
+      }
     }
 
     public void checkEpressVPNAdapter()
@@ -71,7 +75,7 @@ namespace VPNSetup
       NetworkAdapters.enableExpressVPNAdapter();
       var adapters = NetworkAdapters.setAdapters();
 
-      if (adapters.SharedConnection != null)
+      if (adapters.expressVpnGuid != null)
       {
         label12.Text = "Available";
       }
@@ -103,7 +107,7 @@ namespace VPNSetup
       checkHostedNetwork();
       checkEpressVPNAdapter();
       checkServices();
-      NetworkAdapters.Disable_ICS_WMI();
+      InternetAccess.GetIpAddresses();
     }
   }
 }

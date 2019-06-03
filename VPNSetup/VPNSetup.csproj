@@ -85,9 +85,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="IcsManager.cs" />
+    <Compile Include="InternetAccess.cs" />
     <Compile Include="InternetInfo.cs" />
-    <Compile Include="NetShare.cs" />
     <Compile Include="NetworkAdapters.cs" />
     <Compile Include="ProcessCmd.cs" />
     <Compile Include="Program.cs" />

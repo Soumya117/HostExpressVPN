@@ -2,44 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
-using System.Text;
 using System.Management;
-using System.Windows.Forms;
-using NETCONLib;
 
 namespace VPNSetup
 {
+  struct AdpaterGuid
+  {
+    public string expressVpnGuid;
+    public string virtualNetworkGuid;
+  }
+
   class NetworkAdapters
   {
-    public static NetShare setAdapters()
+    public static IEnumerable<NetworkInterface> GetIPv4EthernetAndWirelessInterfaces()
     {
-      INetConnection shareConnection = null;
-      INetConnection homeConnection = null;
+      return
+          from nic in NetworkInterface.GetAllNetworkInterfaces()
+          where nic.Supports(NetworkInterfaceComponent.IPv4)
+          where (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+             || (nic.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
+          select nic;
+    }
 
-
-      foreach (var nic in IcsManager.GetIPv4EthernetAndWirelessInterfaces())
+    public static AdpaterGuid setAdapters()
+    {
+      AdpaterGuid adapterGuid = new AdpaterGuid();
+      foreach (var nic in GetIPv4EthernetAndWirelessInterfaces())
       {
-
         if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet &&
          nic.Description == "ExpressVPN Tap Adapter")
         {
-          shareConnection = IcsManager.FindConnectionByIdOrName(nic.Id);
+          adapterGuid.expressVpnGuid = nic.Id;
         }
 
         if(nic.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 &&
          nic.Description == "Microsoft Hosted Network Virtual Adapter")
         {
-          homeConnection = IcsManager.FindConnectionByIdOrName(nic.Id);
+          adapterGuid.virtualNetworkGuid = nic.Id;
         }
-
       }
-      return new NetShare(shareConnection, homeConnection);
-    }
-
-    public static void disableSharing()
-    {
-      var adapters = setAdapters();
-      IcsManager.disableSharing(adapters.SharedConnection, adapters.HomeConnection);
+      return adapterGuid;
     }
 
     public static void enableExpressVPNAdapter()
@@ -68,28 +70,11 @@ namespace VPNSetup
 
       if( status == "Disabled")
       {
-        Console.WriteLine("Enabling..." + expressAdapter);
         expressAdapter =  "\"" + expressAdapter + "\"";
         var enable_adapter = cmd.enableAdapter(expressAdapter);
         process = new ProcessCmd(enable_adapter);
         process.start();
       }
-    }
-
-    public static void enableSharing()
-    {
-      var adapters = setAdapters();
-
-      var connectionToShare = adapters.SharedConnection;
-      var homeConnection = adapters.HomeConnection;
-
-      if (!adapters.Exists)
-      {
-        MessageBox.Show("Adapters are not configured properly", "Error");
-        return;
-      }
-
-      IcsManager.ShareConnection(connectionToShare, homeConnection);
     }
 
     public static string getExpressVPNAdapter()
@@ -112,10 +97,11 @@ namespace VPNSetup
     public static void enableNetShare()
     {
       var adapters = setAdapters();
-      var id_share = IcsManager.GetProperties(adapters.SharedConnection).Guid;
+
+      var id_share = adapters.expressVpnGuid;
       setPropertiesTrue("IsIcsPublic", id_share);
 
-      var id_home = IcsManager.GetProperties(adapters.HomeConnection).Guid;
+      var id_home = adapters.virtualNetworkGuid;
       setPropertiesTrue("IsIcsPrivate", id_home);
     }
 
@@ -123,10 +109,10 @@ namespace VPNSetup
     {
       var adapters = setAdapters();
 
-      var id_share = IcsManager.GetProperties(adapters.SharedConnection).Guid;
+      var id_share = adapters.expressVpnGuid;
       setPropertiesFalse("IsIcsPublic", id_share);
 
-      var id_home = IcsManager.GetProperties(adapters.HomeConnection).Guid;
+      var id_home = adapters.virtualNetworkGuid;
       setPropertiesFalse("IsIcsPrivate", id_home);
     }
 
@@ -202,40 +188,6 @@ namespace VPNSetup
             continue;
           }
           break;
-        }
-      }
-    }
-
-    public static void Disable_ICS_WMI()
-    {
-      ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\Microsoft\\HomeNet");
-
-      ObjectQuery query = new ObjectQuery("SELECT * FROM HNet_ConnectionProperties ");
-
-      ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
-      ManagementObjectCollection queryCollection = searcher.Get();
-
-      foreach (ManagementObject m in queryCollection)
-      {
-        try
-        {
-          PropertyDataCollection properties = m.Properties;
-          foreach (PropertyData prop in properties)
-          {
-            if (prop.Name == "IsIcsPrivate" && ((Boolean)prop.Value) == true)
-            {
-              Console.WriteLine("Private Connection : {0}", m["Connection"]);
-            }
-            else if (prop.Name == "IsIcsPublic" && ((Boolean)prop.Value) == true)
-            {
-              Console.WriteLine("Public Connection : {0}", m["Connection"]);
-            }
-          }
-        }
-        catch (Exception e)
-        {
-          Console.WriteLine("ex " + e.Message);
-          continue;
         }
       }
     }

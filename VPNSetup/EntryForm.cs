@@ -58,7 +58,14 @@ namespace VPNSetup
 
     private void label2_Click(object sender, EventArgs e)
     {
-      new Form1().ShowDialog(this);
+      if(CheckAvailability.isHostedNetworkSupported)
+      {
+        new Form1().ShowDialog(this);
+      }
+      else
+      {
+        MessageBox.Show("Hosted Network is not supported. \nPlease run initial setup.", "Info");
+      }
     }
   }
 }

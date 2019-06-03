@@ -27,6 +27,11 @@ namespace VPNSetup
     public static ServiceController start(string service_name)
     {
       var serviceController = GetService(service_name);
+      if(serviceController == null)
+      {
+        MessageBox.Show("Service {0} is not running.");
+        return null;
+      }
       if(serviceController.Status != ServiceControllerStatus.Running)
       {
         serviceController.Start();
@@ -46,6 +51,11 @@ namespace VPNSetup
 
        var sharedController = start("SharedAccess");
        changeStartup("SharedAccess");
+
+      if (remoteController == null || sharedController == null)
+      {
+        return false;
+      }
 
        return remoteController.Status == ServiceControllerStatus.Running 
         && sharedController.Status == ServiceControllerStatus.Running;
