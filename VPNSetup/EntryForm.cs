@@ -64,7 +64,7 @@ namespace VPNSetup
       }
       else
       {
-        MessageBox.Show("Hosted Network is not supported. \nPlease run initial setup.", "Info");
+        MessageBox.Show("Hosted Network is not supported. \nPlease run initial setup.\nSee if Microsoft Hosted Network is supported.", "Info");
       }
     }
   }
