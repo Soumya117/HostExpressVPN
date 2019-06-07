@@ -267,6 +267,28 @@ namespace VPNSetup
       return status;
     }
 
+    private string extract_clients(string data)
+    {
+      if (String.IsNullOrEmpty(data))
+        return null;
+      var clients = String.Empty;
+      string[] lines = data.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+      foreach (var line in lines)
+      {
+        if (line != null && line.Contains("Number of clients"))
+        {
+          var result_str = line.ToString();
+          clients = line.Split(':')[1];
+          break;
+        }
+        else
+        {
+          clients = "0";
+        }
+      }
+      return clients;
+    }
+
     private void status()
     {
       setInternetConnectionStatus();
@@ -280,8 +302,11 @@ namespace VPNSetup
       }
       var ssid = extract_hostedNetwork(view_output);
       var status = extract_status(view_output);
+      var clients = extract_clients(view_output);
+
       SetStatusText(status.Trim());
       SetSSIDText(ssid.Trim());
+      SetClientText(clients.Trim());
     }
 
     private void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -324,6 +349,23 @@ namespace VPNSetup
       else
       {
         this.ssid_value.Text = text;
+      }
+    }
+    private void SetClientText(string text)
+    {
+      if (String.IsNullOrEmpty(text))
+      {
+        return;
+      }
+
+      if (this.client_value.InvokeRequired)
+      {
+        SetTextCallback d = new SetTextCallback(SetClientText);
+        this.Invoke(d, new object[] { text });
+      }
+      else
+      {
+        this.client_value.Text = text;
       }
     }
   }

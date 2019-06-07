@@ -58,6 +58,8 @@ namespace VPNSetup
 
     private void label2_Click(object sender, EventArgs e)
     {
+      var check = new CheckAvailability();
+      check.checkHostedNetwork();
       if(CheckAvailability.isHostedNetworkSupported)
       {
         new Form1().ShowDialog(this);

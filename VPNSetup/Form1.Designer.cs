@@ -45,6 +45,8 @@
       this.status_pictureBox = new System.Windows.Forms.PictureBox();
       this.status_value = new System.Windows.Forms.Label();
       this.ssid_value = new System.Windows.Forms.Label();
+      this.label1 = new System.Windows.Forms.Label();
+      this.client_value = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.status_pictureBox)).BeginInit();
@@ -149,9 +151,9 @@
       // pictureBox1
       // 
       this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-      this.pictureBox1.Location = new System.Drawing.Point(331, 45);
+      this.pictureBox1.Location = new System.Drawing.Point(331, 47);
       this.pictureBox1.Name = "pictureBox1";
-      this.pictureBox1.Size = new System.Drawing.Size(228, 153);
+      this.pictureBox1.Size = new System.Drawing.Size(228, 176);
       this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
       this.pictureBox1.TabIndex = 71;
       this.pictureBox1.TabStop = false;
@@ -174,7 +176,7 @@
       this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
       this.label2.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.label2.Location = new System.Drawing.Point(343, 108);
+      this.label2.Location = new System.Drawing.Point(344, 108);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(111, 17);
       this.label2.TabIndex = 73;
@@ -237,6 +239,29 @@
       this.ssid_value.Size = new System.Drawing.Size(0, 17);
       this.ssid_value.TabIndex = 105;
       // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+      this.label1.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.label1.Location = new System.Drawing.Point(343, 181);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(60, 17);
+      this.label1.TabIndex = 106;
+      this.label1.Text = "Clients : ";
+      // 
+      // client_value
+      // 
+      this.client_value.AutoSize = true;
+      this.client_value.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+      this.client_value.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.client_value.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.client_value.Location = new System.Drawing.Point(417, 182);
+      this.client_value.Name = "client_value";
+      this.client_value.Size = new System.Drawing.Size(0, 17);
+      this.client_value.TabIndex = 107;
+      // 
       // Form1
       // 
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -244,6 +269,8 @@
       this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
       this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
       this.ClientSize = new System.Drawing.Size(582, 264);
+      this.Controls.Add(this.client_value);
+      this.Controls.Add(this.label1);
       this.Controls.Add(this.ssid_value);
       this.Controls.Add(this.status_value);
       this.Controls.Add(this.status_pictureBox);
@@ -290,6 +317,8 @@
     private System.Windows.Forms.PictureBox status_pictureBox;
     private System.Windows.Forms.Label status_value;
     private System.Windows.Forms.Label ssid_value;
+    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.Label client_value;
   }
 }
 
