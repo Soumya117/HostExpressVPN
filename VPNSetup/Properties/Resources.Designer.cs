@@ -63,6 +63,16 @@ namespace VPNSetup.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap eb74253fa1f773875385027d12960673_simple_black_home_icon {
+            get {
+                object obj = ResourceManager.GetObject("eb74253fa1f773875385027d12960673-simple-black-home-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap imageedit_7_4663135021_new {
             get {
                 object obj = ResourceManager.GetObject("imageedit_7_4663135021_new", resourceCulture);

@@ -190,13 +190,15 @@ namespace VPNSetup
       "",
       -1, 
       -1);
-      if (password.Length < 8)
-      {
-        MessageBox.Show("Password must be atleast 8 characters.", "Info");
-        return;
-      }
+ 
       if (password.Length > 0)
       {
+        if (password.Length < 8)
+        {
+          MessageBox.Show("Password must be atleast 8 characters.", "Info");
+          return;
+        }
+
         var show_cmd = cmd.viewHostedNetwork();
         processCmd = new ProcessCmd(show_cmd);
         processCmd.start();
@@ -232,7 +234,7 @@ namespace VPNSetup
 
     private void pictureBox4_Click(object sender, EventArgs e)
     {
-      this.Close();
+      Application.Exit();
     }
 
     private void setInternetConnectionStatus()
@@ -367,6 +369,67 @@ namespace VPNSetup
       {
         this.client_value.Text = text;
       }
+    }
+
+    private void pictureBox2_Click_1(object sender, EventArgs e)
+    {
+      this.Hide();
+      new EntryForm().Show();
+    }
+
+    private void toolTip1_Popup(object sender, PopupEventArgs e)
+    {
+
+    }
+
+    private void pictureBox1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void connection_label_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void label2_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void status_label_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void ssid_label_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void status_pictureBox_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void status_value_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void ssid_value_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void label1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void client_value_Click(object sender, EventArgs e)
+    {
+
     }
   }
 }

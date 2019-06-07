@@ -62,7 +62,8 @@ namespace VPNSetup
       check.checkHostedNetwork();
       if(CheckAvailability.isHostedNetworkSupported)
       {
-        new Form1().ShowDialog(this);
+        new Form1().Show();
+        this.Hide();
       }
       else
       {
