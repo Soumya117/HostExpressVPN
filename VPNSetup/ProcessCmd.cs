@@ -49,6 +49,7 @@ namespace VPNSetup
       trim_output(result);
 
       process.WaitForExit();
+      process.Close();
     }
 
     private void trim_output(string result)
