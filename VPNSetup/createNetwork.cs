@@ -70,6 +70,11 @@ namespace VPNSetup
         MessageBox.Show("Both host name and password is required!", "Info");
         return;
       }
+      if (textBox2.Text.Length < 8)
+      {
+        MessageBox.Show("Password must be atleast 8 characters.", "Info");
+        return;
+      }
       StartWork();
     }
 

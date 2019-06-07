@@ -190,6 +190,11 @@ namespace VPNSetup
       "",
       -1, 
       -1);
+      if (password.Length < 8)
+      {
+        MessageBox.Show("Password must be atleast 8 characters.", "Info");
+        return;
+      }
       if (password.Length > 0)
       {
         var show_cmd = cmd.viewHostedNetwork();
