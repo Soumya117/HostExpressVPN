@@ -107,7 +107,6 @@ namespace VPNSetup
       checkHostedNetwork();
       checkEpressVPNAdapter();
       checkServices();
-      InternetAccess.GetIpAddresses();
     }
   }
 }

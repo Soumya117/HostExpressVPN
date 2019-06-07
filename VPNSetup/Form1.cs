@@ -232,7 +232,7 @@ namespace VPNSetup
 
     private void setInternetConnectionStatus()
     {
-      if (InternetInfo.IsInternetAvailable)
+      if (InternetInfo.IsInternetAvailable && InternetAccess.pingLocalNetwork())
       {
         status_pictureBox.Image = VPNSetup.Properties.Resources.imageedit_7_4663135021_new;
       }
