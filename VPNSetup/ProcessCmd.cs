@@ -29,19 +29,19 @@ namespace VPNSetup
       process.StartInfo = startInfo;
     }
 
-    public static string get_Output(string arguments)
+    public static string GetOutput(string arguments)
     {
       var processCmd =  new ProcessCmd(arguments);
-      processCmd.start();
-      return getOutput();
+      processCmd.Start();
+      return GetOutput();
     }
 
-    private static string getOutput()
+    private static string GetOutput()
     {
       return result;
     }
 
-    public void start()
+    public void Start()
     {
       process.Start();
       var success = process.StandardOutput.ReadToEnd();
@@ -53,13 +53,13 @@ namespace VPNSetup
       }
 
       result = success;
-      trim_output(result);
+      Trim(result);
 
       process.WaitForExit();
       process.Close();
     }
 
-    private void trim_output(string result)
+    private void Trim(string result)
     {
       result.Trim().Replace("\r", string.Empty);
       result.Trim().Replace("\n", string.Empty);

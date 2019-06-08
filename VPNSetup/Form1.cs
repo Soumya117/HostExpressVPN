@@ -182,7 +182,7 @@ namespace VPNSetup
 
     private void status()
     {
-      var view_output = HostedNetwork.view_Hosted_Network();
+      var view_output = HostedNetwork.ViewHostedNetwork();
       var ssid = HostedNetwork.extract_Hosted_Network(view_output);
       var status = HostedNetwork.extract_Status(view_output);
       var clients = HostedNetwork.extract_Clients(view_output);

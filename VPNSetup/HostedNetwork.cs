@@ -30,22 +30,22 @@ namespace VPNSetup
 
     public static string start()
     {
-      var start_cmd = Command.startHostedNetwork();
-      var connect_output = ProcessCmd.get_Output(start_cmd);
+      var start_cmd = Command.StartHostedNetwork();
+      var connect_output = ProcessCmd.GetOutput(start_cmd);
       return connect_output;
     }
 
     public static string stop()
     {
-      var stop_cmd = Command.stopHostedNetwork();
-      var stop_output = ProcessCmd.get_Output(stop_cmd);
+      var stop_cmd = Command.StopHostedNetwork();
+      var stop_output = ProcessCmd.GetOutput(stop_cmd);
       return stop_output;
     }
 
     public static string connect()
     {
       NetworkAdapters.enableExpressVPNAdapter();
-      var view_output = view_Hosted_Network();
+      var view_output = ViewHostedNetwork();
       if (String.IsNullOrEmpty(view_output))
       {
         return null;
@@ -59,8 +59,8 @@ namespace VPNSetup
 
     public static void show_Password()
     {
-      var show_pwd = Command.showPassword();
-      var result = ProcessCmd.get_Output(show_pwd);
+      var show_pwd = Command.ShowPassword();
+      var result = ProcessCmd.GetOutput(show_pwd);
       if (String.IsNullOrEmpty(result))
       {
         return;
@@ -95,10 +95,10 @@ namespace VPNSetup
           return null;
         }
 
-        var view_output = view_Hosted_Network();
+        var view_output = ViewHostedNetwork();
         var hostname = extract_Hosted_Network(view_output);
-        var create_cmd = Command.createHostedNetwork(hostname, password);
-        output = ProcessCmd.get_Output(create_cmd);
+        var create_cmd = Command.CreateHostedNetwork(hostname, password);
+        output = ProcessCmd.GetOutput(create_cmd);
       }
       else
         return null;
@@ -137,10 +137,10 @@ namespace VPNSetup
       return clients;
     }
 
-    public static string view_Hosted_Network()
+    public static string ViewHostedNetwork()
     {
-      var show_cmd = Command.viewHostedNetwork();
-      var view_output = ProcessCmd.get_Output(show_cmd);
+      var show_cmd = Command.ViewHostedNetwork();
+      var view_output = ProcessCmd.GetOutput(show_cmd);
       if (String.IsNullOrEmpty(view_output))
       {
         //TODO log

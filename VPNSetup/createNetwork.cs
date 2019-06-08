@@ -8,7 +8,6 @@ namespace VPNSetup
   public partial class createNetwork : Form
   {
     Command cmd = new Command();
-    ProcessCmd processCmd;
     Wait wait_dialog;
     bool success = false;
 
@@ -55,8 +54,8 @@ namespace VPNSetup
 
     private void create()
     {
-      var create_cmd = Command.createHostedNetwork(textBox1.Text, textBox2.Text);
-      var create_output = ProcessCmd.get_Output(create_cmd);
+      var create_cmd = Command.CreateHostedNetwork(textBox1.Text, textBox2.Text);
+      var create_output = ProcessCmd.GetOutput(create_cmd);
       create_hostedNetwork(create_output);
     }
 
