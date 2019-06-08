@@ -1,6 +1,6 @@
 ﻿namespace VPNSetup
 {
-  partial class wait
+  partial class Wait
   {
     /// <summary>
     /// Required designer variable.

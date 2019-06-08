@@ -36,11 +36,8 @@ namespace VPNSetup
     {
       label11.Visible = true;
       label11.Text = "Checking...";
-      command cmd = new command();
-      var show_drivers = cmd.showDrivers();
-      ProcessCmd process = new ProcessCmd(show_drivers);
-      process.start();
-      var show_output = process.getOutput();
+      var show_drivers = Command.showDrivers();
+      var show_output = ProcessCmd.get_Output(show_drivers);
       if(String.IsNullOrEmpty(show_output))
       {
         return;

@@ -12,7 +12,7 @@ namespace VPNSetup
 {
   public partial class EntryForm : Form
   {
-    wait wait_dialog;
+    Wait wait_dialog;
     CheckAvailability check = new CheckAvailability();
 
     public EntryForm()
@@ -22,7 +22,7 @@ namespace VPNSetup
 
     private void pictureBox4_Click(object sender, EventArgs e)
     {
-      this.Close();
+      Application.Exit();
     }
 
     private void button2_Click(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace VPNSetup
 
     private void StartWork()
     {
-      wait_dialog = new wait();
+      wait_dialog = new Wait();
       wait_dialog.Show();
       BackgroundWorker worker = new BackgroundWorker();
       worker.DoWork += DoWork;
@@ -56,12 +56,27 @@ namespace VPNSetup
       StartWork();
     }
 
-    private void label2_Click(object sender, EventArgs e)
+    private void StartCheck()
+    {
+      wait_dialog = new Wait();
+      wait_dialog.Show();
+      BackgroundWorker worker = new BackgroundWorker();
+      worker.DoWork += DoCheck;
+      worker.RunWorkerCompleted += CheckCompleted;
+      worker.RunWorkerAsync();
+    }
+
+    private void DoCheck(object sender, DoWorkEventArgs e)
     {
       var check = new CheckAvailability();
       check.checkHostedNetwork();
-      if(CheckAvailability.isHostedNetworkSupported)
+    }
+
+    private void CheckCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+      if (CheckAvailability.isHostedNetworkSupported)
       {
+        wait_dialog.Close();
         new Form1().Show();
         this.Hide();
       }
@@ -69,6 +84,11 @@ namespace VPNSetup
       {
         MessageBox.Show("Hosted Network is not supported. \nPlease run initial setup.\nSee if Microsoft Hosted Network is supported.", "Info");
       }
+    }
+
+    private void label2_Click(object sender, EventArgs e)
+    {
+      StartCheck();
     }
   }
 }

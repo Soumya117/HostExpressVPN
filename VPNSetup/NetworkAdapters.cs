@@ -47,11 +47,9 @@ namespace VPNSetup
     public static void enableExpressVPNAdapter()
     {
       var expressAdapter = getExpressVPNAdapter();
-      command cmd = new command();
-      var show_adapters = cmd.showAdapters();
-      ProcessCmd process = new ProcessCmd(show_adapters);
-      process.start();
-      var show_output = process.getOutput();
+      Command cmd = new Command();
+      var show_adapters = Command.showAdapters();
+      var show_output = ProcessCmd.get_Output(show_adapters);
       if(String.IsNullOrEmpty(show_output))
       {
         return;
@@ -71,9 +69,8 @@ namespace VPNSetup
       if( status == "Disabled")
       {
         expressAdapter =  "\"" + expressAdapter + "\"";
-        var enable_adapter = cmd.enableAdapter(expressAdapter);
-        process = new ProcessCmd(enable_adapter);
-        process.start();
+        var enable_adapter = Command.enableAdapter(expressAdapter);
+        ProcessCmd.get_Output(enable_adapter);
       }
     }
 

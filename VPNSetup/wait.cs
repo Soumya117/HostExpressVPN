@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace VPNSetup
 {
-  public partial class wait : Form
+  public partial class Wait : Form
   {
-    public wait()
+    public Wait()
     {
       InitializeComponent();
     }

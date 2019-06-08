@@ -12,7 +12,7 @@ namespace VPNSetup
   public class ProcessCmd
   {
     Process process;
-    public string result; 
+    private static string result; 
 
     public ProcessCmd(string arguments)
     {
@@ -29,7 +29,14 @@ namespace VPNSetup
       process.StartInfo = startInfo;
     }
 
-    public string getOutput()
+    public static string get_Output(string arguments)
+    {
+      var processCmd =  new ProcessCmd(arguments);
+      processCmd.start();
+      return getOutput();
+    }
+
+    private static string getOutput()
     {
       return result;
     }

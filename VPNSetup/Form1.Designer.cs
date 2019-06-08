@@ -139,7 +139,6 @@
       // 
       // toolTip1
       // 
-      this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
       // 
       // pictureBox4
       // 
@@ -163,7 +162,6 @@
       this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
       this.pictureBox1.TabIndex = 71;
       this.pictureBox1.TabStop = false;
-      this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
       // 
       // connection_label
       // 
@@ -176,7 +174,6 @@
       this.connection_label.Size = new System.Drawing.Size(143, 17);
       this.connection_label.TabIndex = 72;
       this.connection_label.Text = "Internet Connection : ";
-      this.connection_label.Click += new System.EventHandler(this.connection_label_Click);
       // 
       // label2
       // 
@@ -189,7 +186,6 @@
       this.label2.Size = new System.Drawing.Size(111, 17);
       this.label2.TabIndex = 73;
       this.label2.Text = "Hosted Network";
-      this.label2.Click += new System.EventHandler(this.label2_Click);
       // 
       // status_label
       // 
@@ -202,7 +198,6 @@
       this.status_label.Size = new System.Drawing.Size(56, 17);
       this.status_label.TabIndex = 74;
       this.status_label.Text = "Status : ";
-      this.status_label.Click += new System.EventHandler(this.status_label_Click);
       // 
       // ssid_label
       // 
@@ -215,7 +210,6 @@
       this.ssid_label.Size = new System.Drawing.Size(47, 17);
       this.ssid_label.TabIndex = 77;
       this.ssid_label.Text = "SSID : ";
-      this.ssid_label.Click += new System.EventHandler(this.ssid_label_Click);
       // 
       // status_pictureBox
       // 
@@ -227,7 +221,6 @@
       this.status_pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
       this.status_pictureBox.TabIndex = 103;
       this.status_pictureBox.TabStop = false;
-      this.status_pictureBox.Click += new System.EventHandler(this.status_pictureBox_Click);
       // 
       // status_value
       // 
@@ -239,7 +232,6 @@
       this.status_value.Name = "status_value";
       this.status_value.Size = new System.Drawing.Size(0, 17);
       this.status_value.TabIndex = 104;
-      this.status_value.Click += new System.EventHandler(this.status_value_Click);
       // 
       // ssid_value
       // 
@@ -251,7 +243,6 @@
       this.ssid_value.Name = "ssid_value";
       this.ssid_value.Size = new System.Drawing.Size(0, 17);
       this.ssid_value.TabIndex = 105;
-      this.ssid_value.Click += new System.EventHandler(this.ssid_value_Click);
       // 
       // label1
       // 
@@ -264,7 +255,6 @@
       this.label1.Size = new System.Drawing.Size(60, 17);
       this.label1.TabIndex = 106;
       this.label1.Text = "Clients : ";
-      this.label1.Click += new System.EventHandler(this.label1_Click);
       // 
       // client_value
       // 
@@ -276,7 +266,6 @@
       this.client_value.Name = "client_value";
       this.client_value.Size = new System.Drawing.Size(0, 17);
       this.client_value.TabIndex = 107;
-      this.client_value.Click += new System.EventHandler(this.client_value_Click);
       // 
       // pictureBox2
       // 

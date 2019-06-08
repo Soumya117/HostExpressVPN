@@ -81,7 +81,7 @@
     <Compile Include="CheckAvailability.Designer.cs">
       <DependentUpon>CheckAvailability.cs</DependentUpon>
     </Compile>
-    <Compile Include="command.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="createNetwork.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +100,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="HostedNetwork.cs" />
     <Compile Include="InternetAccess.cs" />
     <Compile Include="InternetInfo.cs" />
     <Compile Include="NetworkAdapters.cs" />
@@ -112,11 +113,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services.cs" />
-    <Compile Include="wait.cs">
+    <Compile Include="utils.cs" />
+    <Compile Include="Wait.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="wait.Designer.cs">
-      <DependentUpon>wait.cs</DependentUpon>
+    <Compile Include="Wait.Designer.cs">
+      <DependentUpon>Wait.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="CheckAvailability.resx">
       <DependentUpon>CheckAvailability.cs</DependentUpon>
@@ -135,8 +137,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="wait.resx">
-      <DependentUpon>wait.cs</DependentUpon>
+    <EmbeddedResource Include="Wait.resx">
+      <DependentUpon>Wait.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
