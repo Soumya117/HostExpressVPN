@@ -24,7 +24,7 @@ namespace VPNSetup
       return null;
     }
 
-    public static ServiceController start(string service_name)
+    public static ServiceController Start(string service_name)
     {
       var serviceController = GetService(service_name);
       if(serviceController == null)
@@ -44,13 +44,13 @@ namespace VPNSetup
       return serviceController;
     }
 
-    public static bool startServices()
+    public static bool StartServices()
     {
-       var remoteController = start("RemoteAccess");
-       changeStartup("RemoteAccess");
+       var remoteController = Start("RemoteAccess");
+       ChangeStartup("RemoteAccess");
 
-       var sharedController = start("SharedAccess");
-       changeStartup("SharedAccess");
+       var sharedController = Start("SharedAccess");
+       ChangeStartup("SharedAccess");
 
       if (remoteController == null || sharedController == null)
       {
@@ -61,12 +61,12 @@ namespace VPNSetup
         && sharedController.Status == ServiceControllerStatus.Running;
     }
 
-    public static void changeStartup(string service_name)
+    public static void ChangeStartup(string service_name)
     {
       var remoteStartup = StartupType(service_name);
       if(!String.IsNullOrEmpty(remoteStartup) && remoteStartup != "Auto")
       {
-        configureStartup(service_name);
+        ConfigureStartup(service_name);
       }
     }
 
@@ -84,7 +84,7 @@ namespace VPNSetup
       return startupType;
     }
 
-    public static void configureStartup(string serviceName)
+    public static void ConfigureStartup(string serviceName)
     {
       var value = "Automatic";
       if (serviceName != null)

@@ -24,7 +24,7 @@ namespace VPNSetup
           select nic;
     }
 
-    public static AdpaterGuid setAdapters()
+    public static AdpaterGuid SetAdapters()
     {
       AdpaterGuid adapterGuid = new AdpaterGuid();
       foreach (var nic in GetIPv4EthernetAndWirelessInterfaces())
@@ -44,9 +44,9 @@ namespace VPNSetup
       return adapterGuid;
     }
 
-    public static void enableExpressVPNAdapter()
+    public static void EnableExpressVPNAdapter()
     {
-      var expressAdapter = getExpressVPNAdapter();
+      var expressAdapter = GetExpressVPNAdapter();
       Command cmd = new Command();
       var show_adapters = Command.ShowAdapters();
       var show_output = ProcessCmd.GetOutput(show_adapters);
@@ -74,7 +74,7 @@ namespace VPNSetup
       }
     }
 
-    public static string getExpressVPNAdapter()
+    public static string GetExpressVPNAdapter()
     {
       string adpater_name = String.Empty;
 
@@ -91,29 +91,29 @@ namespace VPNSetup
       return adpater_name;
     }
 
-    public static void enableNetShare()
+    public static void EnableNetShare()
     {
-      var adapters = setAdapters();
+      var adapters = SetAdapters();
 
       var id_share = adapters.expressVpnGuid;
-      setPropertiesTrue("IsIcsPublic", id_share);
+      SetPropertiesTrue("IsIcsPublic", id_share);
 
       var id_home = adapters.virtualNetworkGuid;
-      setPropertiesTrue("IsIcsPrivate", id_home);
+      SetPropertiesTrue("IsIcsPrivate", id_home);
     }
 
-    public static void disableNetShare()
+    public static void DisableNetShare()
     {
-      var adapters = setAdapters();
+      var adapters = SetAdapters();
 
       var id_share = adapters.expressVpnGuid;
-      setPropertiesFalse("IsIcsPublic", id_share);
+      SetPropertiesFalse("IsIcsPublic", id_share);
 
       var id_home = adapters.virtualNetworkGuid;
-      setPropertiesFalse("IsIcsPrivate", id_home);
+      SetPropertiesFalse("IsIcsPrivate", id_home);
     }
 
-    public static void setPropertiesFalse(string flag, string guid)
+    public static void SetPropertiesFalse(string flag, string guid)
     {
       ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\Microsoft\\HomeNet");
 
@@ -151,7 +151,7 @@ namespace VPNSetup
       }
     }
 
-    public static void setPropertiesTrue(string flag, string guid) 
+    public static void SetPropertiesTrue(string flag, string guid) 
     {
       ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\Microsoft\\HomeNet");
 

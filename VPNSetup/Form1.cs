@@ -27,7 +27,7 @@ namespace VPNSetup
       aTimer.Enabled = true;
       this.ssid_value.Text = "Checking...";
       this.status_value.Text = "Checking...";
-      status();
+      Status();
     }
 
     private void button2_Click(object sender, EventArgs e)
@@ -35,11 +35,16 @@ namespace VPNSetup
       new createNetwork().ShowDialog(this);
     }
 
-    private void display_result(string result)
+    private void DisplayOutput(string result, string failure)
     {
       if (result != null)
       {
         MessageBox.Show(result, "Status");
+      }
+      else
+      {
+        //TODO log
+        Console.WriteLine(failure);
       }
     }
 
@@ -60,8 +65,8 @@ namespace VPNSetup
         MessageBox.Show("Hosted network already started", "Info");
         return;
       }
-      var connect_output = HostedNetwork.connect();
-      display_result(connect_output);
+      var connect_output = HostedNetwork.Connect();
+      DisplayOutput(connect_output, "Returned empty while creating hosted network");
     }
 
     private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -79,7 +84,7 @@ namespace VPNSetup
       wait_dialog = new Wait();
       wait_dialog.Show();
       BackgroundWorker worker = new BackgroundWorker();
-      worker.DoWork += stopTheNetwork;
+      worker.DoWork += StopTheNetwork;
       worker.RunWorkerCompleted += WorkerCompleted;
       worker.RunWorkerAsync();
     }
@@ -91,30 +96,24 @@ namespace VPNSetup
 
     private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
-      HostedNetwork.show_Password();
+      HostedNetwork.ShowPassword();
     }
 
     private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
-      var output = HostedNetwork.change_Password();
-      show_passwordChangeSuccess(output);
+      var output = HostedNetwork.ChangePassword();
+      show_passwordChangeSuccess(output, "Error while changing password");
     }
 
-    private void show_passwordChangeSuccess(string result)
+    private void show_passwordChangeSuccess(string result, string failure)
     {
       if (!String.IsNullOrEmpty(result))
       {
         MessageBox.Show("Password Changed successfully");
       }
-    }
-
-    private void pictureBox2_Click(object sender, EventArgs e)
-    {
-      Services.startServices();
-
-      if (!InternetInfo.IsInternetAvailable)
+      else
       {
-        MessageBox.Show("Please check your internet connection", "Error");
+        Console.WriteLine(failure);
       }
     }
 
@@ -146,7 +145,7 @@ namespace VPNSetup
 
     private void OnTimedEvent(object source, ElapsedEventArgs e)
     {
-      status();
+      Status();
     }
 
     delegate void SetTextCallback(string text);
@@ -169,23 +168,23 @@ namespace VPNSetup
       }
     }
 
-    private void stopTheNetwork(object sender, DoWorkEventArgs e)
+    private void StopTheNetwork(object sender, DoWorkEventArgs e)
     {
       if (this.status_value.Text == "Not started")
       {
         MessageBox.Show("Hosted network not running..", "Info");
         return;
       }
-      var output = HostedNetwork.stop();
-      display_result(output);
+      var output = HostedNetwork.Stop();
+      DisplayOutput(output, "Returned null while stopping hosted network");
     }
 
-    private void status()
+    private void Status()
     {
       var view_output = HostedNetwork.ViewHostedNetwork();
-      var ssid = HostedNetwork.extract_Hosted_Network(view_output);
-      var status = HostedNetwork.extract_Status(view_output);
-      var clients = HostedNetwork.extract_Clients(view_output);
+      var ssid = HostedNetwork.ExtractHostedNetwork(view_output);
+      var status = HostedNetwork.ExtractStatus(view_output);
+      var clients = HostedNetwork.ExtractClients(view_output);
       if (String.IsNullOrEmpty(clients))
       {
         clients = "0";

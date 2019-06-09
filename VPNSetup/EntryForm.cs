@@ -42,7 +42,7 @@ namespace VPNSetup
 
     private void DoWork(object sender, DoWorkEventArgs e)
     {
-      check.runSetup();
+      check.RunSetup();
     }
 
     private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -69,7 +69,7 @@ namespace VPNSetup
     private void DoCheck(object sender, DoWorkEventArgs e)
     {
       var check = new CheckAvailability();
-      check.checkHostedNetwork();
+      check.CheckHostedNetwork();
     }
 
     private void CheckCompleted(object sender, RunWorkerCompletedEventArgs e)

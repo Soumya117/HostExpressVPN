@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace VPNSetup
 {
-  class utils
+  class Util
   {
     public static string ParseCmd(int index, string substring)
     {
@@ -18,8 +18,7 @@ namespace VPNSetup
         if (line != null && line.Contains(substring))
         {
           var result_str = line.ToString();
-          var ssid = line.Split(':')[index];
-          result = string.Join(" ", ssid.Split('"').Where((x, i) => i % 2 != 0));
+          result = line.Split(':')[index];
           break;
         }
       }

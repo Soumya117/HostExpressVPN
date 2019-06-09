@@ -28,7 +28,7 @@ namespace VPNSetup
 
     private void DoWork(object sender, DoWorkEventArgs e)
     {
-      create();
+      Create();
     }
 
     private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -40,23 +40,29 @@ namespace VPNSetup
       }
     }
 
-    public void create_hostedNetwork(string result)
+    public void DisplayOutput(string result, string failure)
     {
-      if(!String.IsNullOrEmpty(result))
+      if (!String.IsNullOrEmpty(result))
       {
         var message = MessageBox.Show(result, "Status", MessageBoxButtons.OK);
         if (message == DialogResult.OK)
         {
-          success = true;         
+          success = true;
         }
+      }
+      else
+      {
+        //TODO log
+        Console.WriteLine(failure);
       }
     }
 
-    private void create()
+    private void Create()
     {
-      var create_cmd = Command.CreateHostedNetwork(textBox1.Text, textBox2.Text);
-      var create_output = ProcessCmd.GetOutput(create_cmd);
-      create_hostedNetwork(create_output);
+      var create_output = HostedNetwork.Create(
+       textBox1.Text,
+       textBox2.Text);
+      DisplayOutput(create_output, "Returned empty while creating hosted network");
     }
 
     private void button1_Click(object sender, EventArgs e)

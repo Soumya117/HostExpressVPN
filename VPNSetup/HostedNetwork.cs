@@ -11,7 +11,7 @@ namespace VPNSetup
 {
   class HostedNetwork
   {
-    public static string extract_Hosted_Network(string result)
+    public static string ExtractHostedNetwork(string result)
     {
       string hostedNetwork = String.Empty;
       string[] lines = result.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
@@ -28,36 +28,42 @@ namespace VPNSetup
       return hostedNetwork;
     }
 
-    public static string start()
+    public static string Start()
     {
       var start_cmd = Command.StartHostedNetwork();
       var connect_output = ProcessCmd.GetOutput(start_cmd);
       return connect_output;
     }
 
-    public static string stop()
+    public static string Stop()
     {
       var stop_cmd = Command.StopHostedNetwork();
       var stop_output = ProcessCmd.GetOutput(stop_cmd);
       return stop_output;
     }
 
-    public static string connect()
+    public static string Connect()
     {
-      NetworkAdapters.enableExpressVPNAdapter();
+      NetworkAdapters.EnableExpressVPNAdapter();
       var view_output = ViewHostedNetwork();
       if (String.IsNullOrEmpty(view_output))
       {
         return null;
       }
-      extract_Hosted_Network(view_output);
-      var connect_output = start();
-      NetworkAdapters.disableNetShare();
-      NetworkAdapters.enableNetShare();
+      var connect_output = Start();
+      NetworkAdapters.DisableNetShare();
+      NetworkAdapters.EnableNetShare();
       return connect_output;
     }
 
-    public static void show_Password()
+    public static string Create(string ssid, string key)
+    {
+      var create_cmd = Command.CreateHostedNetwork(ssid, key);
+      var create_output = ProcessCmd.GetOutput(create_cmd);
+      return create_output;
+    }
+
+    public static void ShowPassword()
     {
       var show_pwd = Command.ShowPassword();
       var result = ProcessCmd.GetOutput(show_pwd);
@@ -77,7 +83,7 @@ namespace VPNSetup
       }
     }
 
-    public static string change_Password()
+    public static string ChangePassword()
     {
       var output = String.Empty;
       string password = Interaction.InputBox(
@@ -96,7 +102,7 @@ namespace VPNSetup
         }
 
         var view_output = ViewHostedNetwork();
-        var hostname = extract_Hosted_Network(view_output);
+        var hostname = ExtractHostedNetwork(view_output);
         var create_cmd = Command.CreateHostedNetwork(hostname, password);
         output = ProcessCmd.GetOutput(create_cmd);
       }
@@ -105,7 +111,7 @@ namespace VPNSetup
 
       return output;
     }
-    public static string extract_Status(string data)
+    public static string ExtractStatus(string data)
     {
       string status = String.Empty;
       string[] lines = data.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
@@ -121,7 +127,7 @@ namespace VPNSetup
       return status;
     }
 
-    public static string extract_Clients(string data)
+    public static string ExtractClients(string data)
     {
       var clients = String.Empty;
       string[] lines = data.Split(new[] { Environment.NewLine }, StringSplitOptions.None);

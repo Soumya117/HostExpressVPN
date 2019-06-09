@@ -20,7 +20,7 @@ namespace VPNSetup
       InitializeComponent();
     }
 
-    public void checkInternetConnection()
+    public void CheckInternetConnection()
     {
       label10.Visible = true;
       label10.Text = "Checking...";
@@ -32,7 +32,7 @@ namespace VPNSetup
         label10.Text = "Unavailable";
     }
 
-    public void checkHostedNetwork()
+    public void CheckHostedNetwork()
     {
       label11.Visible = true;
       label11.Text = "Checking...";
@@ -65,12 +65,12 @@ namespace VPNSetup
       }
     }
 
-    public void checkEpressVPNAdapter()
+    public void CheckEpressVPNAdapter()
     {
       label12.Visible = true;
       label12.Text = "Checking...";
-      NetworkAdapters.enableExpressVPNAdapter();
-      var adapters = NetworkAdapters.setAdapters();
+      NetworkAdapters.EnableExpressVPNAdapter();
+      var adapters = NetworkAdapters.SetAdapters();
 
       if (adapters.expressVpnGuid != null)
       {
@@ -80,11 +80,11 @@ namespace VPNSetup
         label12.Text = "Unavailable";
     }
 
-    public void checkServices()
+    public void CheckServices()
     {
       label13.Visible = true;
       label13.Text = "Checking...";
-      var status = Services.startServices();
+      var status = Services.StartServices();
       if (status)
       {
         label13.Text = "Running";
@@ -98,12 +98,12 @@ namespace VPNSetup
       this.Close();
     }
 
-    public void runSetup()
+    public void RunSetup()
     {
-      checkInternetConnection();
-      checkHostedNetwork();
-      checkEpressVPNAdapter();
-      checkServices();
+      CheckInternetConnection();
+      CheckHostedNetwork();
+      CheckEpressVPNAdapter();
+      CheckServices();
     }
   }
 }
