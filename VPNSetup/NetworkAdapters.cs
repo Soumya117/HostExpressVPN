@@ -27,19 +27,27 @@ namespace VPNSetup
     public static AdpaterGuid SetAdapters()
     {
       AdpaterGuid adapterGuid = new AdpaterGuid();
-      foreach (var nic in GetIPv4EthernetAndWirelessInterfaces())
+      try
       {
-        if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet &&
-         nic.Description == "ExpressVPN Tap Adapter")
+        foreach (var nic in GetIPv4EthernetAndWirelessInterfaces())
         {
-          adapterGuid.expressVpnGuid = nic.Id;
-        }
+          if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet &&
+           nic.Description == "ExpressVPN Tap Adapter")
+          {
+            adapterGuid.expressVpnGuid = nic.Id;
+          }
 
-        if(nic.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 &&
-         nic.Description == "Microsoft Hosted Network Virtual Adapter")
-        {
-          adapterGuid.virtualNetworkGuid = nic.Id;
+          if (nic.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 &&
+           nic.Description == "Microsoft Hosted Network Virtual Adapter")
+          {
+            adapterGuid.virtualNetworkGuid = nic.Id;
+          }
         }
+      }
+      catch (Exception e)
+      {
+        //TODO log
+        Console.WriteLine("Error while retreiving interfaces: " + e.ToString());
       }
       return adapterGuid;
     }
@@ -67,15 +75,23 @@ namespace VPNSetup
     {
       string adpater_name = String.Empty;
 
-      SelectQuery wmiQuery = new SelectQuery("SELECT * FROM Win32_NetworkAdapter WHERE NetConnectionId != NULL");
-      ManagementObjectSearcher searchProcedure = new ManagementObjectSearcher(wmiQuery);
-      foreach (ManagementObject item in searchProcedure.Get())
+      try
       {
-        if (((string)item["Name"]) == "ExpressVPN Tap Adapter")
+        SelectQuery wmiQuery = new SelectQuery("SELECT * FROM Win32_NetworkAdapter WHERE NetConnectionId != NULL");
+        ManagementObjectSearcher searchProcedure = new ManagementObjectSearcher(wmiQuery);
+        foreach (ManagementObject item in searchProcedure.Get())
         {
-          adpater_name = (item["NetConnectionID"]).ToString();
-          break;
+          if (((string)item["Name"]) == "ExpressVPN Tap Adapter")
+          {
+            adpater_name = (item["NetConnectionID"]).ToString();
+            break;
+          }
         }
+      }
+      catch (Exception e)
+      {
+        //TODO log
+        Console.WriteLine("Error while retrieving expressvpn adapter name: " + e.ToString());
       }
       return adpater_name;
     }
@@ -85,10 +101,10 @@ namespace VPNSetup
       var adapters = SetAdapters();
 
       var id_share = adapters.expressVpnGuid;
-      SetPropertiesTrue("IsIcsPublic", id_share);
+      SetProperties("IsIcsPublic", id_share, true);
 
       var id_home = adapters.virtualNetworkGuid;
-      SetPropertiesTrue("IsIcsPrivate", id_home);
+      SetProperties("IsIcsPrivate", id_home, true);
     }
 
     public static void DisableNetShare()
@@ -96,85 +112,55 @@ namespace VPNSetup
       var adapters = SetAdapters();
 
       var id_share = adapters.expressVpnGuid;
-      SetPropertiesFalse("IsIcsPublic", id_share);
+      SetProperties("IsIcsPublic", id_share, false);
 
       var id_home = adapters.virtualNetworkGuid;
-      SetPropertiesFalse("IsIcsPrivate", id_home);
+      SetProperties("IsIcsPrivate", id_home, false);
     }
 
-    public static void SetPropertiesFalse(string flag, string guid)
+    public static void SetProperties(string flag, string guid, bool value)
     {
-      ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\Microsoft\\HomeNet");
-
-      ObjectQuery query = new ObjectQuery("SELECT * FROM HNet_ConnectionProperties ");
-
-      ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
-      ManagementObjectCollection queryCollection = searcher.Get();
-
-      foreach (ManagementObject m in queryCollection)
+      try
       {
-        var conn_uid = m["Connection"].ToString();
-        conn_uid = string.Join(" ", conn_uid.Split('"').Where((x, i) => i % 2 != 0));
-        if (conn_uid == guid)
+        ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\Microsoft\\HomeNet");
+
+        ObjectQuery query = new ObjectQuery("SELECT * FROM HNet_ConnectionProperties ");
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
+        ManagementObjectCollection queryCollection = searcher.Get();
+
+        foreach (ManagementObject m in queryCollection)
         {
-          try
+          var conn_uid = m["Connection"].ToString();
+          conn_uid = string.Join(" ", conn_uid.Split('"').Where((x, i) => i % 2 != 0));
+          if (conn_uid == guid)
           {
-            PropertyDataCollection properties = m.Properties;
-            foreach (PropertyData prop in properties)
+            try
             {
-              if (prop.Name == flag && ((Boolean)prop.Value) == true)
+              PropertyDataCollection properties = m.Properties;
+              foreach (PropertyData prop in properties)
               {
-                prop.Value = false;
-                m.Put();
-                break;
+                if (prop.Name == flag && ((Boolean)prop.Value) == !value)
+                {
+                  prop.Value = value;
+                  m.Put();
+                  break;
+                }
               }
             }
+            catch (Exception e)
+            {
+              Console.WriteLine("ex " + e.Message);
+              continue;
+            }
+            break;
           }
-          catch (Exception e)
-          {
-            Console.WriteLine("ex " + e.Message);
-            continue;
-          }
-          break;
         }
       }
-    }
-
-    public static void SetPropertiesTrue(string flag, string guid) 
-    {
-      ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\Microsoft\\HomeNet");
-
-      ObjectQuery query = new ObjectQuery("SELECT * FROM HNet_ConnectionProperties ");
-
-      ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
-      ManagementObjectCollection queryCollection = searcher.Get();
-
-      foreach (ManagementObject m in queryCollection)
+      catch (Exception e)
       {
-        var conn_uid = m["Connection"].ToString();
-        conn_uid = string.Join(" ", conn_uid.Split('"').Where((x, i) => i % 2 != 0));
-        if (conn_uid == guid)
-        {
-          try
-          {
-            PropertyDataCollection properties = m.Properties;
-            foreach (PropertyData prop in properties)
-            {
-              if (prop.Name == flag && ((Boolean)prop.Value) == false)
-              {
-                prop.Value = true;
-                m.Put();
-                break;
-              }
-            }
-          }
-          catch (Exception e)
-          {
-            Console.WriteLine("ex " + e.Message);
-            continue;
-          }
-          break;
-        }
+        //TODO log
+        Console.WriteLine("Error while setting property " + e.ToString());
+        Console.WriteLine("GUID: " + guid + " Flag : " + flag + " Value: " + value);
       }
     }
   }

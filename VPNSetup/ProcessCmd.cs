@@ -31,8 +31,17 @@ namespace VPNSetup
 
     public static string GetOutput(string arguments)
     {
-      var processCmd =  new ProcessCmd(arguments);
-      processCmd.Start();
+      try
+      {
+        var processCmd = new ProcessCmd(arguments);
+        processCmd.Start();
+      }
+      catch (Exception e)
+      {
+        //TODO log
+        Console.WriteLine("Error while processing command " + arguments + ": " + e.ToString());
+      }
+
       return GetOutput();
     }
 

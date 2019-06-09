@@ -100,10 +100,18 @@ namespace VPNSetup
 
     public void RunSetup()
     {
-      CheckInternetConnection();
-      CheckHostedNetwork();
-      CheckEpressVPNAdapter();
-      CheckServices();
+      try
+      {
+        CheckInternetConnection();
+        CheckHostedNetwork();
+        CheckEpressVPNAdapter();
+        CheckServices();
+      }
+      catch (Exception e)
+      {
+        //TODO log
+        Console.WriteLine("Error while running setup: " + e.ToString());
+      }
     }
   }
 }

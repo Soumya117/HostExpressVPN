@@ -135,15 +135,6 @@ namespace VPNSetup
       }
     }
 
-    private void validate(string data)
-    {
-      if (String.IsNullOrEmpty(data))
-      {  
-         //TODO log
-         Console.WriteLine(data + " is not available for the moment");
-      }
-    }
-
     private void OnTimedEvent(object source, ElapsedEventArgs e)
     {
       Status();

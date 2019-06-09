@@ -13,14 +13,23 @@ namespace VPNSetup
   {
     public static ServiceController GetService(string service_name)
     {
-      ServiceController[] scServices = ServiceController.GetServices();
-      foreach (ServiceController scTemp in scServices)
+      try
       {
-        if (scTemp.ServiceName == service_name)
+        ServiceController[] scServices = ServiceController.GetServices();
+        foreach (ServiceController scTemp in scServices)
         {
-          return scTemp;
+          if (scTemp.ServiceName == service_name)
+          {
+            return scTemp;
+          }
         }
       }
+      catch (Exception e)
+      {
+        //TODO log
+        Console.WriteLine("Error while retreiving service " + service_name + ": " + e.ToString());
+      }
+     
       return null;
     }
 
@@ -32,16 +41,51 @@ namespace VPNSetup
         MessageBox.Show("Service {0} is not running.");
         return null;
       }
-      if(serviceController.Status != ServiceControllerStatus.Running)
+      try
       {
-        serviceController.Start();
-        while (serviceController.Status == ServiceControllerStatus.Stopped)
+        if (serviceController.Status != ServiceControllerStatus.Running)
         {
-          Thread.Sleep(1000);
-          serviceController.Refresh();
+          serviceController.Start();
+          while (serviceController.Status == ServiceControllerStatus.Stopped)
+          {
+            Thread.Sleep(1000);
+            serviceController.Refresh();
+          }
         }
       }
+      catch (Exception e)
+      {
+        //TODO log
+        Console.WriteLine("Error while starting service " + service_name +": " + e.ToString());
+      }
+ 
       return serviceController;
+    }
+
+    public static void RestartService(string serviceName, int timeoutMilliseconds)
+    {
+      ServiceController service = new ServiceController(serviceName);
+      try
+      {
+        int millisec1 = Environment.TickCount;
+        TimeSpan timeout = TimeSpan.FromMilliseconds(timeoutMilliseconds);
+
+        service.Stop();
+        service.WaitForStatus(ServiceControllerStatus.Stopped, timeout);
+
+        // count the rest of the timeout
+        int millisec2 = Environment.TickCount;
+        timeout = TimeSpan.FromMilliseconds(timeoutMilliseconds - (millisec2 - millisec1));
+
+        service.Start();
+        service.WaitForStatus(ServiceControllerStatus.Running, timeout);
+      }
+      catch (Exception e)
+      {
+        //TODO log
+        Console.WriteLine("Exception during restarting service " + serviceName + ":  " + e.ToString());
+
+      }
     }
 
     public static bool StartServices()
@@ -73,28 +117,43 @@ namespace VPNSetup
     public static string StartupType(string serviceName)
     {
       string startupType = String.Empty;
-
+      try
+      {
         if (serviceName != null)
         {
           string path = "Win32_Service.Name='" + serviceName + "'";
           ManagementPath p = new ManagementPath(path);
           ManagementObject ManagementObj = new ManagementObject(p);
-          startupType =  ManagementObj["StartMode"].ToString();
+          startupType = ManagementObj["StartMode"].ToString();
         }
+      }
+      catch (Exception e)
+      {
+        //TODO log
+        Console.WriteLine("Error while retreiving startup type for service " + serviceName + ": " + e.ToString());
+      }
       return startupType;
     }
 
     public static void ConfigureStartup(string serviceName)
     {
       var value = "Automatic";
-      if (serviceName != null)
+      try
       {
-        string path = "Win32_Service.Name='" + serviceName + "'";
-        ManagementPath p = new ManagementPath(path);
-        ManagementObject ManagementObj = new ManagementObject(p);
-        object[] parameters = new object[1];
-        parameters[0] = value;
-        ManagementObj.InvokeMethod("ChangeStartMode", parameters);
+        if (serviceName != null)
+        {
+          string path = "Win32_Service.Name='" + serviceName + "'";
+          ManagementPath p = new ManagementPath(path);
+          ManagementObject ManagementObj = new ManagementObject(p);
+          object[] parameters = new object[1];
+          parameters[0] = value;
+          ManagementObj.InvokeMethod("ChangeStartMode", parameters);
+        }
+      }
+      catch (Exception e)
+      {
+        //TODO log
+        Console.WriteLine("Error while configuring startup for service : "+serviceName + ": " + e.ToString());
       }
     }
   }
