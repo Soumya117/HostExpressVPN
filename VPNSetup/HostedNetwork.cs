@@ -11,21 +11,11 @@ namespace VPNSetup
 {
   class HostedNetwork
   {
-    public static string ExtractHostedNetwork(string result)
+    public static string ExtractHostedNetwork(string input)
     {
-      string hostedNetwork = String.Empty;
-      string[] lines = result.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-      foreach (var line in lines)
-      {
-        if (line != null && line.Contains("SSID"))
-        {
-          var result_str = line.ToString();
-          var ssid = line.Split(':')[1];
-          hostedNetwork = string.Join(" ", ssid.Split('"').Where((x, i) => i % 2 != 0));
-          break;
-        }
-      }
-      return hostedNetwork;
+      var hostedNetwork = Util.ParseCmd(input, 1, "SSID");
+      var ssid = string.Join(" ", hostedNetwork.Split('"').Where((x, i) => i % 2 != 0));
+      return ssid;
     }
 
     public static string Start()
@@ -63,24 +53,17 @@ namespace VPNSetup
       return create_output;
     }
 
-    public static void ShowPassword()
+    public static string ShowPassword()
     {
       var show_pwd = Command.ShowPassword();
-      var result = ProcessCmd.GetOutput(show_pwd);
-      if (String.IsNullOrEmpty(result))
+      var input = ProcessCmd.GetOutput(show_pwd);
+      if (String.IsNullOrEmpty(input))
       {
-        return;
+        //TODO log
+        Console.WriteLine("Result is empty while querying password");
       }
-      string[] lines = result.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-      foreach (string line in lines)
-      {
-        if (line.Contains("User security key"))
-        {
-          var key = line.Split(':')[1];
-          MessageBox.Show("Password is: " + key, "Info");
-          return;
-        }
-      }
+      var key = Util.ParseCmd(input, 1, "User security key");
+      return key;
     }
 
     public static string ChangePassword()
@@ -111,35 +94,15 @@ namespace VPNSetup
 
       return output;
     }
-    public static string ExtractStatus(string data)
+    public static string ExtractStatus(string input)
     {
-      string status = String.Empty;
-      string[] lines = data.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-      foreach (var line in lines)
-      {
-        if (line != null && line.Contains("Status"))
-        {
-          var result_str = line.ToString();
-          status = line.Split(':')[1];
-          break;
-        }
-      }
+      string status = Util.ParseCmd(input, 1, "Status");
       return status;
     }
 
-    public static string ExtractClients(string data)
+    public static string ExtractClients(string input)
     {
-      var clients = String.Empty;
-      string[] lines = data.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-      foreach (var line in lines)
-      {
-        if (line != null && line.Contains("Number of clients"))
-        {
-          var result_str = line.ToString();
-          clients = line.Split(':')[1];
-          break;
-        }
-      }
+      var clients = Util.ParseCmd(input, 1, "Number of clients");
       return clients;
     }
 

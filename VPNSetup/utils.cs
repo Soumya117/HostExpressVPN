@@ -9,10 +9,10 @@ namespace VPNSetup
 {
   class Util
   {
-    public static string ParseCmd(int index, string substring)
+    public static string ParseCmd(string input, int index, string substring)
     {
       var result = String.Empty;
-      string[] lines = result.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+      string[] lines = input.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
       foreach (var line in lines)
       {
         if (line != null && line.Contains(substring))

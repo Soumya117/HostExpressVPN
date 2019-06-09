@@ -54,18 +54,7 @@ namespace VPNSetup
       {
         return;
       }
-      string status = String.Empty;
-      string[] lines = show_output.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-      foreach (var line in lines)
-      {
-        if (line != null && line.Contains(expressAdapter))
-        {
-          var result_str = line.ToString();
-          status = line.Split()[0];
-          break;
-        }
-      }
-
+      string status = Util.ParseCmd(show_output, 0, expressAdapter);
       if( status == "Disabled")
       {
         expressAdapter =  "\"" + expressAdapter + "\"";
