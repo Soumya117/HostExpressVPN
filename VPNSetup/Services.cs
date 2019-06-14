@@ -62,7 +62,7 @@ namespace VPNSetup
       return serviceController;
     }
 
-    public static void RestartService(string serviceName, int timeoutMilliseconds)
+    public static ServiceController RestartService(string serviceName, int timeoutMilliseconds)
     {
       ServiceController service = new ServiceController(serviceName);
       try
@@ -84,8 +84,8 @@ namespace VPNSetup
       {
         //TODO log
         Console.WriteLine("Exception during restarting service " + serviceName + ":  " + e.ToString());
-
       }
+      return service;
     }
 
     public static bool StartServices()
@@ -103,6 +103,21 @@ namespace VPNSetup
 
        return remoteController.Status == ServiceControllerStatus.Running 
         && sharedController.Status == ServiceControllerStatus.Running;
+    }
+
+    public static bool RestartServices()
+    {
+      var remoteController = RestartService("RemoteAccess", 2000);
+
+      var sharedController = RestartService("SharedAccess", 2000);
+
+      if (remoteController == null || sharedController == null)
+      {
+        return false;
+      }
+
+      return remoteController.Status == ServiceControllerStatus.Running
+       && sharedController.Status == ServiceControllerStatus.Running;
     }
 
     public static void ChangeStartup(string service_name)

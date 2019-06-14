@@ -228,5 +228,18 @@ namespace VPNSetup
       this.Hide();
       new EntryForm().Show();
     }
+
+    private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+       DialogResult dr = MessageBox.Show("Please disconnect express VPN", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+      if (dr == DialogResult.OK)
+      {
+        TroubleShoot.ResetDns();
+        TroubleShoot.RestartServices();
+        TroubleShoot.RestartHostedNetwork();
+      }
+      else
+        return;
+    }
   }
 }

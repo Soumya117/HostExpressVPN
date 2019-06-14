@@ -13,7 +13,7 @@ namespace VPNSetup
   {
     public static string ExtractHostedNetwork(string input)
     {
-      var hostedNetwork = Util.ParseCmd(input, 1, "SSID");
+      var hostedNetwork = Util.ParseCmd(input, 1, "SSID", ':');
       var ssid = string.Join(" ", hostedNetwork.Split('"').Where((x, i) => i % 2 != 0));
       return ssid;
     }
@@ -62,7 +62,7 @@ namespace VPNSetup
         //TODO log
         Console.WriteLine("Result is empty while querying password");
       }
-      var key = Util.ParseCmd(input, 1, "User security key");
+      var key = Util.ParseCmd(input, 1, "User security key", ':');
       return key;
     }
 
@@ -96,13 +96,13 @@ namespace VPNSetup
     }
     public static string ExtractStatus(string input)
     {
-      string status = Util.ParseCmd(input, 1, "Status");
+      string status = Util.ParseCmd(input, 1, "Status", ':');
       return status;
     }
 
     public static string ExtractClients(string input)
     {
-      var clients = Util.ParseCmd(input, 1, "Number of clients");
+      var clients = Util.ParseCmd(input, 1, "Number of clients", ':');
       return clients;
     }
 

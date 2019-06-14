@@ -48,6 +48,7 @@
       this.label1 = new System.Windows.Forms.Label();
       this.client_value = new System.Windows.Forms.Label();
       this.pictureBox2 = new System.Windows.Forms.PictureBox();
+      this.linkLabel3 = new System.Windows.Forms.LinkLabel();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.status_pictureBox)).BeginInit();
@@ -129,16 +130,13 @@
       this.linkLabel2.Cursor = System.Windows.Forms.Cursors.Hand;
       this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.linkLabel2.Location = new System.Drawing.Point(21, 222);
+      this.linkLabel2.Location = new System.Drawing.Point(20, 222);
       this.linkLabel2.Name = "linkLabel2";
       this.linkLabel2.Size = new System.Drawing.Size(118, 16);
       this.linkLabel2.TabIndex = 4;
       this.linkLabel2.TabStop = true;
       this.linkLabel2.Text = "Change Password";
       this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
-      // 
-      // toolTip1
-      // 
       // 
       // pictureBox4
       // 
@@ -279,6 +277,22 @@
       this.pictureBox2.TabStop = false;
       this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click_1);
       // 
+      // linkLabel3
+      // 
+      this.linkLabel3.Anchor = System.Windows.Forms.AnchorStyles.None;
+      this.linkLabel3.AutoSize = true;
+      this.linkLabel3.BackColor = System.Drawing.Color.Transparent;
+      this.linkLabel3.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.linkLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.linkLabel3.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.linkLabel3.Location = new System.Drawing.Point(429, 9);
+      this.linkLabel3.Name = "linkLabel3";
+      this.linkLabel3.Size = new System.Drawing.Size(88, 16);
+      this.linkLabel3.TabIndex = 109;
+      this.linkLabel3.TabStop = true;
+      this.linkLabel3.Text = "Troubleshoot";
+      this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+      // 
       // Form1
       // 
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -286,6 +300,7 @@
       this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
       this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
       this.ClientSize = new System.Drawing.Size(582, 264);
+      this.Controls.Add(this.linkLabel3);
       this.Controls.Add(this.pictureBox2);
       this.Controls.Add(this.client_value);
       this.Controls.Add(this.label1);
@@ -339,6 +354,7 @@
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Label client_value;
     private System.Windows.Forms.PictureBox pictureBox2;
+    private System.Windows.Forms.LinkLabel linkLabel3;
   }
 }
 

@@ -62,7 +62,7 @@ namespace VPNSetup
       {
         return;
       }
-      string status = Util.ParseCmd(show_output, 0, expressAdapter);
+      string status = Util.ParseCmd(show_output, 0, expressAdapter,' ');
       if( status == "Disabled")
       {
         expressAdapter =  "\"" + expressAdapter + "\"";

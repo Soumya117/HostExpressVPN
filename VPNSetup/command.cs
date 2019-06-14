@@ -56,5 +56,35 @@ namespace VPNSetup
       return enable_adapter;
     }
 
+    public static string WinsockReset()
+    {
+      var winsock_reset = "netsh winsock reset";
+      return winsock_reset;
+    }
+
+    public static string IpReset()
+    {
+      var ip_reset = "netsh int ip reset";
+      return ip_reset;
+    }
+
+    public static string IpRelease()
+    {
+      var ip_release = "ipconfig /release";
+      return ip_release;
+    }
+
+    public static string IpRenew()
+    {
+      var ip_renew = "ipconfig /renew";
+      return ip_renew;
+
+    }
+
+    public static string FlushDns()
+    {
+      var flush_dns = "ipconfig /flushdns";
+      return flush_dns;
+    }
   }
 }
