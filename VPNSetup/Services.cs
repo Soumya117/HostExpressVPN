@@ -58,27 +58,33 @@ namespace VPNSetup
         //TODO log
         Console.WriteLine("Error while starting service " + service_name +": " + e.ToString());
       }
- 
       return serviceController;
     }
 
-    public static ServiceController RestartService(string serviceName, int timeoutMilliseconds)
+    public static ServiceController RestartService(string serviceName)
     {
       ServiceController service = new ServiceController(serviceName);
       try
       {
-        int millisec1 = Environment.TickCount;
-        TimeSpan timeout = TimeSpan.FromMilliseconds(timeoutMilliseconds);
+        if (service.Status != ServiceControllerStatus.Stopped)
+        {
+          service.Stop();
+          while (service.Status != ServiceControllerStatus.Stopped)
+          {
+            Thread.Sleep(1000);
+            service.Refresh();
+          }
+        }
 
-        service.Stop();
-        service.WaitForStatus(ServiceControllerStatus.Stopped, timeout);
-
-        // count the rest of the timeout
-        int millisec2 = Environment.TickCount;
-        timeout = TimeSpan.FromMilliseconds(timeoutMilliseconds - (millisec2 - millisec1));
-
-        service.Start();
-        service.WaitForStatus(ServiceControllerStatus.Running, timeout);
+        if (service.Status == ServiceControllerStatus.Stopped)
+        {
+          service.Start();
+          while (service.Status == ServiceControllerStatus.Stopped)
+          {
+            Thread.Sleep(1000);
+            service.Refresh();
+          }
+        }
       }
       catch (Exception e)
       {
@@ -107,9 +113,9 @@ namespace VPNSetup
 
     public static bool RestartServices()
     {
-      var remoteController = RestartService("RemoteAccess", 2000);
+      var remoteController = RestartService("RemoteAccess");
 
-      var sharedController = RestartService("SharedAccess", 2000);
+      var sharedController = RestartService("SharedAccess");
 
       if (remoteController == null || sharedController == null)
       {

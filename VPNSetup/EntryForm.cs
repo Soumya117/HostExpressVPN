@@ -33,7 +33,10 @@ namespace VPNSetup
     private void StartWork()
     {
       wait_dialog = new Wait();
-      wait_dialog.Show();
+      BeginInvoke(new MethodInvoker(() =>
+      {
+        wait_dialog.ShowDialog(this);
+      }));
       BackgroundWorker worker = new BackgroundWorker();
       worker.DoWork += DoWork;
       worker.RunWorkerCompleted += WorkerCompleted;
@@ -59,7 +62,10 @@ namespace VPNSetup
     private void StartCheck()
     {
       wait_dialog = new Wait();
-      wait_dialog.Show();
+      BeginInvoke(new MethodInvoker(() =>
+      {
+        wait_dialog.ShowDialog(this);
+      }));
       BackgroundWorker worker = new BackgroundWorker();
       worker.DoWork += DoCheck;
       worker.RunWorkerCompleted += CheckCompleted;

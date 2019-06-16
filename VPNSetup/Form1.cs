@@ -51,7 +51,10 @@ namespace VPNSetup
     private void StartWork()
     {
       wait_dialog = new Wait();
-      wait_dialog.Show();
+      BeginInvoke(new MethodInvoker(() =>
+      {
+        wait_dialog.ShowDialog(this);
+      }));
       BackgroundWorker worker = new BackgroundWorker();
       worker.DoWork += connectToNetwork;
       worker.RunWorkerCompleted += WorkerCompleted;
@@ -82,7 +85,10 @@ namespace VPNSetup
     private void StopWork()
     {
       wait_dialog = new Wait();
-      wait_dialog.Show();
+      BeginInvoke(new MethodInvoker(() =>
+      {
+        wait_dialog.ShowDialog(this);
+      }));
       BackgroundWorker worker = new BackgroundWorker();
       worker.DoWork += StopTheNetwork;
       worker.RunWorkerCompleted += WorkerCompleted;
@@ -162,7 +168,7 @@ namespace VPNSetup
 
     private void StopTheNetwork(object sender, DoWorkEventArgs e)
     {
-      if (this.status_value.Text == "Not started")
+      if (Util.Equals(this.status_value.Text, "Not started"))
       {
         MessageBox.Show("Hosted network not running..", "Info");
         return;
@@ -229,14 +235,36 @@ namespace VPNSetup
       new EntryForm().Show();
     }
 
+    private void StartTroubleshoot()
+    {
+      wait_dialog = new Wait();
+      BeginInvoke(new MethodInvoker(() =>
+      {
+        wait_dialog.ShowDialog(this);
+      }));
+      BackgroundWorker worker = new BackgroundWorker();
+      worker.DoWork += RunTroubleshoot;
+      worker.RunWorkerCompleted += TroubleShootCompleted;
+      worker.RunWorkerAsync();
+    }
+
+    private void RunTroubleshoot(object sender, DoWorkEventArgs e)
+    {
+      TroubleShoot.RunTroubleShoot();
+    }
+
+    private void TroubleShootCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+      wait_dialog.Close();
+      MessageBox.Show("TroubleShooting finised. \nHosted Network Restarted.", "Info");
+    }
+
     private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
        DialogResult dr = MessageBox.Show("Please disconnect express VPN", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
       if (dr == DialogResult.OK)
       {
-        TroubleShoot.ResetDns();
-        TroubleShoot.RestartServices();
-        TroubleShoot.RestartHostedNetwork();
+        StartTroubleshoot();
       }
       else
         return;

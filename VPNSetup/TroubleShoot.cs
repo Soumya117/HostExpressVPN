@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace VPNSetup
 {
   class TroubleShoot
   {
+
+    public static void RunTroubleShoot()
+    {
+      ResetDns();
+      RestartServices();
+      RestartHostedNetwork();
+    }
+
     public static void ResetDns()
     {
       var output = String.Empty;

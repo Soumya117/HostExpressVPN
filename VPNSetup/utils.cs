@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace VPNSetup
 {
@@ -23,6 +24,13 @@ namespace VPNSetup
         }
       }
       return result;
+    }
+
+    public static bool Equals(string actual, string expected)
+    {
+      string regex = Regex.Escape(expected).Replace(@"\ ", @"\s*");
+      bool isMatch = Regex.IsMatch(actual, regex, RegexOptions.IgnoreCase);
+      return isMatch;
     }
   }
 }

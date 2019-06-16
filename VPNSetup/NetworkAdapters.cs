@@ -32,13 +32,13 @@ namespace VPNSetup
         foreach (var nic in GetIPv4EthernetAndWirelessInterfaces())
         {
           if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet &&
-           nic.Description == "ExpressVPN Tap Adapter")
+           Util.Equals(nic.Description, "ExpressVPN Tap Adapter"))
           {
             adapterGuid.expressVpnGuid = nic.Id;
           }
 
           if (nic.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 &&
-           nic.Description == "Microsoft Hosted Network Virtual Adapter")
+           Util.Equals(nic.Description, "Microsoft Hosted Network Virtual Adapter"))
           {
             adapterGuid.virtualNetworkGuid = nic.Id;
           }
@@ -63,7 +63,7 @@ namespace VPNSetup
         return;
       }
       string status = Util.ParseCmd(show_output, 0, expressAdapter,' ');
-      if( status == "Disabled")
+      if( Util.Equals(status, "Disabled"))
       {
         expressAdapter =  "\"" + expressAdapter + "\"";
         var enable_adapter = Command.EnableAdapter(expressAdapter);
@@ -74,14 +74,13 @@ namespace VPNSetup
     public static string GetExpressVPNAdapter()
     {
       string adpater_name = String.Empty;
-
       try
       {
         SelectQuery wmiQuery = new SelectQuery("SELECT * FROM Win32_NetworkAdapter WHERE NetConnectionId != NULL");
         ManagementObjectSearcher searchProcedure = new ManagementObjectSearcher(wmiQuery);
         foreach (ManagementObject item in searchProcedure.Get())
         {
-          if (((string)item["Name"]) == "ExpressVPN Tap Adapter")
+          if (Util.Equals((string)item["Name"], "ExpressVPN Tap Adapter"))
           {
             adpater_name = (item["NetConnectionID"]).ToString();
             break;
@@ -132,7 +131,7 @@ namespace VPNSetup
         {
           var conn_uid = m["Connection"].ToString();
           conn_uid = string.Join(" ", conn_uid.Split('"').Where((x, i) => i % 2 != 0));
-          if (conn_uid == guid)
+          if (Util.Equals(conn_uid, guid))
           {
             try
             {
