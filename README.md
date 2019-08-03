@@ -23,3 +23,12 @@ Configure Sharing:
 
 The software takes care of the above mentioned steps. Then you need to start Express VPN by selecting the preffered location.
 The vpn is shared now. You can connect your TV and phone and other computer to the hosted network and enjoy the benefits of express vpn over the shared network.
+
+
+Sample Screens:
+
+![alt text](https://github.com/Soumya117/HostExpressVPN/blob/master/Welcome.JPG) <br /><br />
+
+![alt text](https://github.com/Soumya117/HostExpressVPN/blob/master/InitialSetup.JPG) <br /><br />
+
+![alt text](https://github.com/Soumya117/HostExpressVPN/blob/master/configureNetworkJPG.JPG) <br /><br />
